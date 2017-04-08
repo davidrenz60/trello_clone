@@ -1,10 +1,23 @@
 {{#each cards}}
 <li class="card" position-id={{position}}>
+  <div class="label-icons">
+    {{#each labels}}
+    <div class="label-icon {{color}}"></div>
+    {{/each}}
+  </div>
   <p>{{title}}<i class="fa fa-pencil"></i></p>
   <div class="card-icons">
     {{#if_equal subscribed true}}
-    <i class="fa fa-eye"><i>
+    <i class="fa fa-eye"></i>
     {{/if_equal}}
+    {{#if dueDate}}
+    <span>{{format_short_date dueDate}}</span>
+    <i class="fa fa-clock-o"></i>
+    {{/if}}
+    {{#if_not_equal commentCount 0}}
+    <span>{{commentCount}}</span>
+    <i class="fa fa-comment-o"></i>
+    {{/if_not_equal}}
   </div>
 </li>
 {{/each}}

@@ -18,8 +18,16 @@ var MoveCardView = Backbone.View.extend({
     var position = +$el.find('#select-position :selected').val();
     var removedId = this.originalList.get('id');
     var newId = this.list.get('id');
+
+    this.model.get('activities').add({
+      cardMove: true,
+      from: this.originalList.get('title'),
+      to: listTitle,
+    });
+
     App.trigger('remove_card', this.model, removedId);
     App.trigger('add_card', this.model, newId, position);
+
     this.remove();
     this.parentView.close();
   },

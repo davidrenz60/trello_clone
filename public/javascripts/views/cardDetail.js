@@ -22,10 +22,11 @@ var CardDetailView = Backbone.View.extend({
   addComment: function(e) {
     e.preventDefault();
     var text = $(e.target).find('textarea').val();
-    var comment = new Comment({ text: text });
+    var comment = new Activity({ text: text, comment: true });
 
-    this.model.get('comments').add(comment);
-    this.cards.sync('create', this.cards);
+    this.model.get('activities').add(comment);
+    this.model.set('commentCount', (this.model.get('commentCount') + 1));
+    this.syncCards();
     this.render();
   },
 
@@ -105,6 +106,7 @@ var CardDetailView = Backbone.View.extend({
     var date = new Date(e);
 
     this.model.set('dueDate', date);
+    this.model.get('activities').add({ setDueDate: true, date: date });
     this.syncCards();
     this.render();
   },
@@ -112,6 +114,7 @@ var CardDetailView = Backbone.View.extend({
   removeDueDate: function(e) {
     e.preventDefault();
     this.model.unset('dueDate');
+    this.model.get('activities').add({ removeDueDate: true });
     this.syncCards();
     this.render();
   },
@@ -130,7 +133,7 @@ var CardDetailView = Backbone.View.extend({
 
   render: function() {
     var context = this.model.toJSON();
-    context.comments = this.model.get('comments').toJSON();
+    context.activities = this.model.get('activities').toJSON();
     context.labels = this.model.get('labels').toJSON();
     context.list_title = App.lists.get(this.listId).get('title');
 
@@ -142,8 +145,6 @@ var CardDetailView = Backbone.View.extend({
       onClose: this.getDate.bind(this),
     });
   },
-
-
 
   initialize: function(options) {
     this.listId = options.listId;

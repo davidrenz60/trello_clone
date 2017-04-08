@@ -20,12 +20,22 @@
         "title": "card two in list one, position 1",
         "subscribed": false,
         "position": 1,
-        "comments": [{
+        "commentCount": 2,
+        "activities": [{
+            "comment": true,
             "text": "this is a comment",
             "timestamp": 1491525777549
         }, {
+            "comment": true,
             "text": "this is another comment",
             "timestamp": 1491525817302
+        }],
+        "labels": [{
+            "color": "red",
+            "title": "title for red label"
+        }, {
+            "color": "yellow",
+            "title": "title for yellow label"
         }]
      }]
    }, {

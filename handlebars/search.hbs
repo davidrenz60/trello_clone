@@ -2,11 +2,13 @@
 {{#if cards}}
 {{#each cards}}
 <div class="search-result">
-  <div class="search-preview" data-listId="{{listId}}"" data-position="{{position}}">
-    <p>{{description}}</p>
-  </div>
+  <a href="/list/{{listId}}/card/{{position}}">
+    <div class="search-preview">
+      <p>{{title}}</p>
+    </div>
+  </a>
   <div class="search-description">
-    <p>{{description}}</p>
+    <p>{{title}}</p>
     <p>In list: <span>{{listName}}</span> on My Board</p>
   </div>
 </div>

@@ -95,6 +95,6 @@ var ListView = Backbone.View.extend({
     this.render();
     this.createCards();
     this.listenTo(this.model, 'change', this.rerender);
-    this.listenTo(this.cards, 'reset add card_moved card_change', this.rerender);
+    this.listenTo(this.cards, 'reset add card_moved card_change label_update', this.rerender);
   },
 });

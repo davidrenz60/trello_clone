@@ -14,5 +14,24 @@ var Lists = Backbone.Collection.extend({
     return $('div.list').map(function(idx, el) {
       return +$(el).attr('list-id');
     });
+
+  },
+
+  getAllCards: function() {
+    var result = [];
+
+    App.lists.each(function(list) {
+      var listId = list.get('id');
+      var title = list.get('title');
+
+      list.view.cards.each(function(card) {
+        card = card.toJSON();
+        card.listTitle = title;
+        card.listId = listId;
+        result.push(card);
+      });
+    });
+
+    return result;
   }
 });

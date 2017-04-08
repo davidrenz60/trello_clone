@@ -17,14 +17,43 @@ this["JST"]["cardDetail"] = Handlebars.template({"1":function(container,depth0,h
     + container.escapeExpression((helpers.format_date || (depth0 && depth0.format_date) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.dueDate : depth0),{"name":"format_date","hash":{},"data":data}))
     + "</p><a class=\"remove-date\">Remove</a></div>";
 },"7":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {};
+
+  return ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.comment : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.setDueDate : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.removeDueDate : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.cardMove : depth0),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"8":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression;
 
-  return "<li class=\"activity\"><p class=\"comment-desc\">"
+  return "<li class=\"activity comment\"><p class=\"comment-desc\">"
     + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
     + "</p><p class=\"timestamp\">"
     + alias3((helpers.format_timestamp || (depth0 && depth0.format_timestamp) || alias2).call(alias1,(depth0 != null ? depth0.timestamp : depth0),{"name":"format_timestamp","hash":{},"data":data}))
-    + "<a class=\"delete-comment\">delete</a></p></li>";
-},"9":function(container,depth0,helpers,partials,data) {
+    + "</p></li>";
+},"10":function(container,depth0,helpers,partials,data) {
+    var alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression;
+
+  return "<li class=\"activity setDueDate\"><p class=\"action-desc\">The due date was set to "
+    + alias3((helpers.format_date || (depth0 && depth0.format_date) || alias2).call(alias1,(depth0 != null ? depth0.date : depth0),{"name":"format_date","hash":{},"data":data}))
+    + "</p><p class=\"timestamp\">"
+    + alias3((helpers.format_timestamp || (depth0 && depth0.format_timestamp) || alias2).call(alias1,(depth0 != null ? depth0.timestamp : depth0),{"name":"format_timestamp","hash":{},"data":data}))
+    + "</p></li>";
+},"12":function(container,depth0,helpers,partials,data) {
+    return "<li class=\"activity removeDueDate\"><p class=\"action-desc\">The due date was removed</p><p class=\"timestamp\">"
+    + container.escapeExpression((helpers.format_timestamp || (depth0 && depth0.format_timestamp) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.timestamp : depth0),{"name":"format_timestamp","hash":{},"data":data}))
+    + "</p></li>";
+},"14":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<li class=\"activity cardMove\"><p class=\"action-desc\">this card was moved from <span>"
+    + alias4(((helper = (helper = helpers.from || (depth0 != null ? depth0.from : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"from","hash":{},"data":data}) : helper)))
+    + "</span> to <span>"
+    + alias4(((helper = (helper = helpers.to || (depth0 != null ? depth0.to : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"to","hash":{},"data":data}) : helper)))
+    + "</span></p><p class=\"timestamp\">"
+    + alias4((helpers.format_timestamp || (depth0 && depth0.format_timestamp) || alias2).call(alias1,(depth0 != null ? depth0.timestamp : depth0),{"name":"format_timestamp","hash":{},"data":data}))
+    + "</p></li>";
+},"16":function(container,depth0,helpers,partials,data) {
     return "<i class=\"fa fa-check\"></i>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -44,9 +73,9 @@ this["JST"]["cardDetail"] = Handlebars.template({"1":function(container,depth0,h
     + "</p><form class=\"open-description\"><textarea>"
     + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
     + "</textarea><div><input type=\"submit\" value=\"Save\"/><i class=\"fa fa-close description-close\"></i></div></form></div><div class=\"comments\"><h3>Add Comment<i class=\"fa fa-comment-o\"></i></h3><form class=\"add-comment\"><textarea></textarea><input type=\"submit\" class=\"add-comment\" value=\"Send\"/></form></div><div class=\"activity\"><h3>Activity<i class=\"fa fa-newspaper-o\"></i></h3><ul class=\"activities\">"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.comments : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.activities : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</li></ul></div></div><div class=\"detail-sidebar\"><div class=\"add-options\"><h3>Add</h3><a class=\"menu-button labels\">Labels<i class=\"fa fa-tag\"></i></a><div id=\"pick-date\"><input type=\"hidden\" id=\"datepicker\"><i class=\"fa fa-calendar\"></i></div></a><h3>Actions</h3><a class=\"menu-button move-list-action\">Move<i class=\"fa fa-arrow-right\"></i></a><a class=\"menu-button copy\">Copy<i class=\"fa fa-clone\"></i></a><a class=\"menu-button subscribe\">Subscribe<i class=\"fa fa-eye\"></i>"
-    + ((stack1 = (helpers.if_equal || (depth0 && depth0.if_equal) || alias2).call(alias1,(depth0 != null ? depth0.subscribed : depth0),true,{"name":"if_equal","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_equal || (depth0 && depth0.if_equal) || alias2).call(alias1,(depth0 != null ? depth0.subscribed : depth0),true,{"name":"if_equal","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</a><a class=\"archive menu-button\">Archive<i class=\"fa fa-trash\"></i></a></div></div>";
 },"useData":true});
 
@@ -55,13 +84,33 @@ this["JST"]["cards"] = Handlebars.template({"1":function(container,depth0,helper
 
   return "<li class=\"card\" position-id="
     + alias4(((helper = (helper = helpers.position || (depth0 != null ? depth0.position : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"position","hash":{},"data":data}) : helper)))
-    + "><p>"
+    + "><div class=\"label-icons\">"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.labels : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div><p>"
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "<i class=\"fa fa-pencil\"></i></p><div class=\"card-icons\">"
-    + ((stack1 = (helpers.if_equal || (depth0 && depth0.if_equal) || alias2).call(alias1,(depth0 != null ? depth0.subscribed : depth0),true,{"name":"if_equal","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_equal || (depth0 && depth0.if_equal) || alias2).call(alias1,(depth0 != null ? depth0.subscribed : depth0),true,{"name":"if_equal","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.dueDate : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_not_equal || (depth0 && depth0.if_not_equal) || alias2).call(alias1,(depth0 != null ? depth0.commentCount : depth0),0,{"name":"if_not_equal","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div></li>";
 },"2":function(container,depth0,helpers,partials,data) {
-    return "<i class=\"fa fa-eye\"><i>";
+    var helper;
+
+  return "<div class=\"label-icon "
+    + container.escapeExpression(((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"color","hash":{},"data":data}) : helper)))
+    + "\"></div>";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "<i class=\"fa fa-eye\"></i>";
+},"6":function(container,depth0,helpers,partials,data) {
+    return "<span>"
+    + container.escapeExpression((helpers.format_short_date || (depth0 && depth0.format_short_date) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.dueDate : depth0),{"name":"format_short_date","hash":{},"data":data}))
+    + "</span><i class=\"fa fa-clock-o\"></i>";
+},"8":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "<span>"
+    + container.escapeExpression(((helper = (helper = helpers.commentCount || (depth0 != null ? depth0.commentCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"commentCount","hash":{},"data":data}) : helper)))
+    + "</span><i class=\"fa fa-comment-o\"></i>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -181,14 +230,14 @@ this["JST"]["search"] = Handlebars.template({"1":function(container,depth0,helpe
 },"2":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"search-result\"><div class=\"search-preview\" data-listId=\""
+  return "<div class=\"search-result\"><a href=\"/list/"
     + alias4(((helper = (helper = helpers.listId || (depth0 != null ? depth0.listId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"listId","hash":{},"data":data}) : helper)))
-    + "\"\" data-position=\""
+    + "/card/"
     + alias4(((helper = (helper = helpers.position || (depth0 != null ? depth0.position : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"position","hash":{},"data":data}) : helper)))
-    + "\"><p>"
-    + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
-    + "</p></div><div class=\"search-description\"><p>"
-    + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
+    + "\"><div class=\"search-preview\"><p>"
+    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
+    + "</p></div></a><div class=\"search-description\"><p>"
+    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</p><p>In list: <span>"
     + alias4(((helper = (helper = helpers.listName || (depth0 != null ? depth0.listName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"listName","hash":{},"data":data}) : helper)))
     + "</span> on My Board</p></div></div>";

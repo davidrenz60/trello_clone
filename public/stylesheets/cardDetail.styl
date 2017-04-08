@@ -84,6 +84,7 @@
       box-sizing: border-box;
       float: left;
       margin: 0 4px 4px 0;
+      cursor: pointer
     .due-date
       float: left
       position: relative
@@ -156,6 +157,7 @@
       margin: 0 0 15px 0
     input[type="submit"]
       submitButton()
+
   .activity
     li
       border-bottom: 1px solid #cdd2d4
@@ -168,8 +170,10 @@
     p.comment-desc
       background: #ffffff
       padding: 10px
-      margin: 0 0 15px 0
+      margin: 0 0 8px 0
       box-shadow: 0 1px 3px rgba(0,0,0,.33)
+    p.action-desc
+      margin: 0 0 8px 0
     p.timestamp
       font-size: 12px
       color: #8c8c8c
@@ -177,6 +181,8 @@
     a
       cursor: pointer
       margin-left: 10px
+    span
+      font-weight: bold
   .detail-list-info
     p.move-list-action
       color: #8c8c8c

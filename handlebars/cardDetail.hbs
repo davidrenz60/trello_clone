@@ -43,11 +43,31 @@
   <div class="activity">
     <h3>Activity<i class="fa fa-newspaper-o"></i></h3>
     <ul class="activities">
-      {{#each comments}}
-        <li class="activity">
+      {{#each activities}}
+        {{#if comment}}
+        <li class="activity comment">
           <p class="comment-desc">{{text}}</p>
-          <p class="timestamp">{{format_timestamp timestamp}}<a class="delete-comment">delete</a></p>
+          <p class="timestamp">{{format_timestamp timestamp}}</p>
         </li>
+        {{/if}}
+        {{#if setDueDate}}
+        <li class="activity setDueDate">
+          <p class="action-desc">The due date was set to {{format_date date}}</p>
+          <p class="timestamp">{{format_timestamp timestamp}}</p>
+        </li>
+        {{/if}}
+        {{#if removeDueDate}}
+        <li class="activity removeDueDate">
+          <p class="action-desc">The due date was removed</p>
+          <p class="timestamp">{{format_timestamp timestamp}}</p>
+        </li>
+        {{/if}}
+        {{#if cardMove}}
+        <li class="activity cardMove">
+          <p class="action-desc">this card was moved from <span>{{from}}</span> to <span>{{to}}</span></p>
+          <p class="timestamp">{{format_timestamp timestamp}}</p>
+        </li>
+        {{/if}}
       {{/each}}
       </li>
     </ul>

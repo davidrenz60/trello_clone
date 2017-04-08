@@ -9,13 +9,26 @@ var MoveAllCardsView = Backbone.View.extend({
 
   moveAllCards: function(e) {
     var $el = $(e.target);
-    var title = $el.text();
     var targetId = $el.data('id');
+    var id = this.model.get('id');
+    var title = $el.text();
+    var from = App.lists.get(id).get('title');
+    var cards = App.lists.getCardsFor(id);
 
     if (title === this.model.get('title')) {
       this.remove();
       return;
     }
+
+    cards.forEach(function(card) {
+      debugger;
+      card.get('activities').add({
+        cardMove: true,
+        to: title,
+        from: from,
+      });
+    });
+
 
     App.trigger('move_all_cards', this.model, targetId);
     this.remove();

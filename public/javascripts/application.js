@@ -2,6 +2,7 @@ var App = {
   $el: $('main'),
   $lists: $('#lists'),
   $header: $('header'),
+  $search: $('#header-search input'),
   $modalLayer: $('#modal-layer'),
   templates: JST,
 
@@ -78,19 +79,33 @@ var App = {
 
   openSearchView: function(e) {
     e.preventDefault();
-    this.search = new SearchView({
-      cards: [{description: "this is a test card", listName: 'name', listId: 1, position: 0}, {description: 'another card', listName: 'next list name', listId: 1, position: 0}],
-    });
-    // iterate through all cards and make this
+    new SearchView({ cards: [] } );
   },
 
   closeSearchView: function(e) {
-    e.preventDefault();
-    this.search.remove();
+    var $el = $(e.target);
+    $el.val('');
+
+    setTimeout(function() {
+      App.$el.find("#search").remove();
+    }, 100);
+  },
+
+  searchAllCards: function(e) {
+    var text = $(e.target).val();
+    var regex = new RegExp(text, 'i');
+    var results = App.lists.getAllCards().filter(function(card) {
+      if (card.title.search(regex) >= 0) {
+        return card;
+      }
+    });
+
+    new SearchView({ cards: results });
   },
 
   bindEvents: function() {
     _.extend(this, Backbone.Events);
+
     this.$lists.sortable({
       forcePlaceholderSize: true,
       placeholder: 'sortable-placeholder',
@@ -101,8 +116,9 @@ var App = {
     this.on('remove_card', this.removeCard);
     this.on('add_card', this.addCard);
     this.on('cards_reordered', this.reorderCards);
-    this.$header.find('#header-search input').on('focus', this.openSearchView);
-    // this.$header.find('#header-search input').on('blur', this.closeSearchView);
+    this.$search.on('focus', this.openSearchView);
+    this.$search.on('blur', this.closeSearchView);
+    this.$search.on('keyup', this.searchAllCards);
   },
 };
 
@@ -128,8 +144,16 @@ Handlebars.registerHelper('format_date', function(date) {
   return moment(date).format('MMM DD YYYY');
 });
 
+Handlebars.registerHelper('format_short_date', function(date) {
+  return moment(date).format('MMM DD');
+});
+
 Handlebars.registerHelper('format_timestamp', function(time) {
   return moment(time).fromNow();
+});
+
+Handlebars.registerHelper('count_comments', function(activities) {
+  return activities.filter({ comment: true }).length;
 });
 
 Handlebars.registerHelper('times', function(start, end, block) {

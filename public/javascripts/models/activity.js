@@ -1,4 +1,4 @@
-var Comment = Backbone.Model.extend({
+var Activity = Backbone.Model.extend({
   defaults: {
     timestamp: new Date().getTime(),
   }

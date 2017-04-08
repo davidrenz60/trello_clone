@@ -222,6 +222,7 @@ header a {
   background: #e2e4e6;
   border-radius: 3px;
   margin: 0 5px;
+  word-wrap: break-word;
 }
 #lists div.list div.list-actions-menu {
   position: absolute;
@@ -415,13 +416,23 @@ ul.cards div.card-icons {
 }
 ul.cards div.card-icons i {
   color: #919292;
-  margin-right: 20px;
+  margin-right: 10px;
 }
-ul.cards div.card-icons i span {
-  font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 300;
-  margin-left: 5px;
+ul.cards div.card-icons span {
+  color: #919292;
+  font-size: 12px;
+  margin-right: 2px;
+}
+ul.cards div.label-icons {
+  width: 100%;
+  overflow: hidden;
+}
+ul.cards div.label-icon {
+  float: left;
+  width: 42px;
+  height: 10px;
+  margin: 1px 1px;
+  border-radius: 3px;
 }
 ul.cards .sortable-placeholder-card {
   background: rgba(0,0,0,0.15);
@@ -529,6 +540,7 @@ ul.cards .sortable-placeholder-card {
   box-sizing: border-box;
   float: left;
   margin: 0 4px 4px 0;
+  cursor: pointer;
 }
 #card-detail .detail-header .due-date {
   float: left;
@@ -648,8 +660,11 @@ ul.cards .sortable-placeholder-card {
 #card-detail .activity p.comment-desc {
   background: #fff;
   padding: 10px;
-  margin: 0 0 15px 0;
+  margin: 0 0 8px 0;
   box-shadow: 0 1px 3px rgba(0,0,0,0.33);
+}
+#card-detail .activity p.action-desc {
+  margin: 0 0 8px 0;
 }
 #card-detail .activity p.timestamp {
   font-size: 12px;
@@ -659,6 +674,9 @@ ul.cards .sortable-placeholder-card {
 #card-detail .activity a {
   cursor: pointer;
   margin-left: 10px;
+}
+#card-detail .activity span {
+  font-weight: bold;
 }
 #card-detail .detail-list-info p.move-list-action {
   color: #8c8c8c;
@@ -1010,13 +1028,15 @@ ul.cards .sortable-placeholder-card {
   overflow: hidden;
   margin-bottom: 10px;
 }
-#search div.search-preview {
+#search a {
+  display: block;
+  position: relative;
+  top: 2px;
   background: #fff;
   width: 180px;
   float: left;
   padding: 5px;
   border-radius: 3px;
-  cursor: pointer;
 }
 #search div.search-preview p {
   font-size: 13px;
@@ -1041,6 +1061,11 @@ ul.cards .sortable-placeholder-card {
 #search div.search-description p + p span {
   font-weight: bold;
 }
+html {
+  height: 100%;
+  overflow: hidden;
+  background: #00aecc;
+}
 body {
   font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
@@ -1048,7 +1073,7 @@ main {
   position: fixed;
   top: 40px;
   background: #00aecc;
-  height: 100%;
+  height: 94%;
   width: 100vw;
   overflow-x: auto;
   white-space: nowrap;

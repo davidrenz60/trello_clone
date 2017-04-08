@@ -43,10 +43,12 @@ var CardsView = Backbone.View.extend({
   },
 
   render: function() {
+    var context = JSON.parse(JSON.stringify(this.collection));
+
     this.collection.view = this;
     this.$list.parent().find('ul').remove();
     this.$el.attr('list-id', this.collection.listId);
-    this.$el.html(this.template({ cards: this.collection.toJSON() }));
+    this.$el.html(this.template({ cards: context }));
     this.$el.insertAfter(this.$list);
     this.bindEvents();
   },

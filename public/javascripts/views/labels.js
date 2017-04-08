@@ -92,7 +92,7 @@ var LabelsView = Backbone.View.extend({
 
   setPosition: function() {
     if (this.target.text() === "Labels") {
-      this.$el.css({ top: 150, right: -147 });
+      this.$el.css({ top: 200, right: -147 });
     } else {
       this.$el.css({ top: 125, left: 50 });
     }

@@ -1,0 +1,31 @@
+<i class="fa fa-close"></i>
+<p>Move Card</p>
+<hr>
+<form>
+  <div class="select-div">
+    <span class="label">Board</span>
+    <span class="value">My Board</span>
+    <select></select>
+  </div>
+  <div class="select-div list-select">
+    <span class="label">List</span>
+    <span class="value">{{listTitle}}</span>
+    <select id="select-list">
+      <option>{{listTitle}}</option>
+      {{#each lists}}
+      <option>{{title}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="select-div position-select">
+    <span class="label">Position</span>
+    <span class="value">{{position}}</span>
+    <select id="select-position">
+      <option>{{position}}</options>
+    {{#times 0 max}}
+      <option>{{this}}</option>
+    {{/times}}
+    </select>
+  </div>
+  <input id="submit-move" type="submit" value="Move">
+</form>

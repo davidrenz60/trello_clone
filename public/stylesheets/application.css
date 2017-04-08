@@ -1,0 +1,1094 @@
+@import "whitespace-reset.css";
+header {
+  position: fixed;
+  width: 100vw;
+  overflow: hidden;
+  height: 30px;
+  background: #0094ae;
+  padding: 5px 0;
+}
+header a {
+  background: #4cb4c6;
+  border-radius: 3px;
+  display: inline-block;
+  color: #edf3f5;
+  font-weight: bold;
+  line-height: 30px;
+  height: 30px;
+}
+#header-left {
+  float: left;
+  margin-left: 5px;
+}
+#header-left a.header-button-boards {
+  padding: 0 0px 0 35px;
+  margin-right: 8px;
+}
+#header-left a.header-button-boards i {
+  position: relative;
+  right: 76px;
+  top: 2px;
+  font-size: 20px;
+}
+#header-search {
+  float: left;
+  position: relative;
+}
+#header-search input {
+  width: 175px;
+  background: #4cb4c6;
+  vertical-align: top;
+  border: none;
+  height: 30px;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 0 7px;
+}
+#header-search input:focus {
+  width: 250px;
+  outline: none;
+  background: #fff;
+  transition: width 200ms;
+}
+#header-search i {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 17px;
+  color: #edf3f5;
+}
+#header-right {
+  float: right;
+  margin-right: 5px;
+}
+#header-right a {
+  margin-right: 8px;
+  vertical-align: top;
+}
+#header-right a:last-of-type {
+  margin-right: 0;
+}
+#header-right a.header-button-plus {
+  box-sizing: border-box;
+  width: 30px;
+  font-weight: 100;
+  font-size: 33px;
+  line-height: 23px;
+  text-align: center;
+}
+#header-right a.header-button-user {
+  padding-right: 8px;
+}
+#header-right a.header-button-info,
+#header-right a.header-button-alerts {
+  width: 30px;
+  text-align: center;
+  font-size: 19px;
+  line-height: 29px;
+}
+#header-right #user-icon {
+  display: inline-block;
+  text-align: center;
+  background: #e2e4e6;
+  color: #4f4f4f;
+  width: 30px;
+  height: 100%;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin-right: 8px;
+}
+.header-logo {
+  position: absolute;
+  left: 48%;
+  display: inline-block;
+  height: 30px;
+  width: 80px;
+  background: url("/images/header-logo.png") 0 0 no-repeat;
+}
+#board-header {
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  background: #00aecc;
+  overflow: hidden;
+  padding: 10px 15px;
+}
+#board-header h2 {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 30px;
+}
+#board-header a,
+#board-header i {
+  display: inline-block;
+  color: #fff;
+}
+#board-header .button-private {
+  display: inline-block;
+}
+#board-header i {
+  margin-right: 10px;
+}
+#board-header-left {
+  float: left;
+}
+#board-header-right {
+  float: right;
+  margin-right: 25px;
+}
+#board-header-right a {
+  text-decoration: underline;
+  font-size: 13px;
+}
+#lists-container {
+  position: relative;
+  top: 45px;
+}
+#lists-container div#add-list {
+  width: 270px;
+  box-sizing: border-box;
+  position: relative;
+  vertical-align: top;
+  cursor: pointer;
+  display: inline-block;
+  background: #009ab4;
+  color: #b3e1e9;
+  margin: 0 5px;
+  padding: 10px;
+  border-radius: 3px;
+}
+#lists-container div#add-list:hover {
+  background: #007a8f;
+  transition: background 100ms;
+}
+#lists-container div#add-list form.add-list-form {
+  display: none;
+  cursor: default;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 270px;
+  padding: 3px;
+  background: #e2e4e6;
+  border-radius: 3px;
+}
+#lists-container div#add-list form.add-list-form input[type="text"] {
+  display: block;
+  width: 264px;
+  height: 30px;
+  margin: 0 auto 5px auto;
+  padding: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: rgba(0,0,0,0.05);
+  box-shadow: inset 0 1px 8px rgba(0,0,0,0.15);
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+#lists-container div#add-list form.add-list-form input[type="text"]:focus {
+  outline: none;
+}
+#lists-container div#add-list form.add-list-form input[type="submit"] {
+  cursor: pointer;
+  background: -webkit-linear-gradient(top, #61bd4f 0, #5aac44 100%);
+  box-shadow: 0 1px 0 #3f6f21;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 18px;
+  font-size: 14px;
+}
+#lists-container div#add-list form.add-list-form a {
+  cursor: pointer;
+  color: #919292;
+  font-size: 25px;
+  margin-left: 11px;
+  vertical-align: middle;
+}
+#lists {
+  float: left;
+  white-space: nowrap;
+}
+#lists * {
+  white-space: initial;
+}
+#lists div.list {
+  width: 270px;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  background: #e2e4e6;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+#lists div.list div.list-actions-menu {
+  position: absolute;
+  z-index: 2;
+  top: 32px;
+  right: -270px;
+  width: 300px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+#lists div.list div.list-actions-menu p {
+  color: #8c8c8c;
+  text-align: center;
+  margin-top: 10px;
+}
+#lists div.list div.list-actions-menu i {
+  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+#lists div.list div.list-actions-menu li {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+#lists div.list div.list-actions-menu li:hover {
+  background: #298fca;
+  color: #fff;
+}
+#lists div.list div.list-actions-menu ul {
+  color: #4d4d4d;
+  font-weight: bold;
+}
+#lists div.list div.list-actions-menu hr {
+  background: #d6dadc;
+  border: 0;
+  color: #d6dadc;
+  height: 1px;
+  margin: 9pt 0;
+  width: 100%;
+}
+#lists div.list-header {
+  overflow: hidden;
+  padding: 8px 10px;
+}
+#lists div.list-header h3 {
+  float: left;
+  line-height: 24px;
+  color: #4d4d4d;
+  cursor: pointer;
+}
+#lists div.list-header textarea {
+  display: none;
+  position: absolute;
+  left: 8px;
+  width: 195px;
+  height: 18px;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4d4d4d;
+  resize: none;
+  outline: none;
+}
+#lists div.list-header a {
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  float: right;
+  color: #9c9c9c;
+}
+#lists div.list-header a:hover {
+  background: #cdd2d4;
+  border-radius: 3px;
+  cursor: default;
+}
+#lists div.list-header i {
+  float: right;
+  line-height: 23px;
+  margin-right: 5px;
+  color: #8c8c8c;
+}
+#lists div.add-card {
+  position: relative;
+  padding: 8px 10px;
+  color: #919292;
+  cursor: pointer;
+}
+#lists div.add-card:hover {
+  background: #cdd2d4;
+}
+#lists div.add-card:hover p {
+  text-decoration: underline;
+  color: #555;
+}
+#lists form.add-card-form {
+  display: none;
+  cursor: default;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 270px;
+  padding: 3px;
+  background: #e2e4e6;
+  border-radius: 3px;
+}
+#lists form.add-card-form textarea {
+  -webkit-appearance: none;
+  display: block;
+  box-sizing: border-box;
+  width: 255px;
+  height: 60px;
+  margin: 0 auto 5px auto;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #4d4d4d;
+  outline: none;
+}
+#lists form.add-card-form input[type="submit"] {
+  cursor: pointer;
+  background: -webkit-linear-gradient(top, #61bd4f 0, #5aac44 100%);
+  box-shadow: 0 1px 0 #3f6f21;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 18px;
+  font-size: 14px;
+}
+#lists form.add-card-form a {
+  cursor: pointer;
+  color: #919292;
+  font-size: 25px;
+  margin-left: 11px;
+  vertical-align: middle;
+}
+#lists form.add-card-form.top {
+  position: initial;
+}
+.sortable-placeholder {
+  background: rgba(0,0,0,0.25);
+  border-radius: 3px;
+  display: inline-block;
+  width: 270px;
+  margin: 0 5px;
+}
+ul.cards {
+  min-height: 6px;
+}
+ul.cards p {
+  cursor: pointer;
+  position: relative;
+  color: #4d4d4d;
+  padding: 0 20px 10px 0;
+}
+ul.cards p i {
+  opacity: 0;
+  text-align: center;
+  line-height: 20px;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  right: 0px;
+  top: -3px;
+  background: #f00;
+}
+ul.cards p i:hover {
+  opacity: 1;
+  background: #cdd2d4;
+  border-radius: 3px;
+}
+ul.cards li {
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  border-radius: 3px;
+  margin: 0 8px 6px 8px;
+  padding: 6px;
+  background: #fff;
+}
+ul.cards li:hover {
+  background: #e5e9ef;
+}
+ul.cards div.card-icons {
+  padding-left: 5px;
+}
+ul.cards div.card-icons i {
+  color: #919292;
+  margin-right: 20px;
+}
+ul.cards div.card-icons i span {
+  font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  margin-left: 5px;
+}
+ul.cards .sortable-placeholder-card {
+  background: rgba(0,0,0,0.15);
+  width: 246px;
+  display: inline-block;
+  margin: 2px 5px;
+}
+#modal-layer {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+#card-detail {
+  box-sizing: border-box;
+  position: relative;
+  background-color: #edeff0;
+  border-radius: 3px;
+  width: 730px;
+  z-index: 3;
+  left: 50%;
+  margin: 50px 0 0 -365px;
+  padding: 0 0 25px 0;
+}
+#card-detail:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+#card-detail h3 {
+  font-size: 16px;
+  color: #4d4d4d;
+  margin: 0 0 6px 0;
+}
+#card-detail h4 {
+  font-weight: normal;
+  display: inline-block;
+  margin: 0px 7px 7px 0px;
+  font-size: 14px;
+  color: #8c8c8c;
+}
+#card-detail h4 + a {
+  text-decoration: underline;
+  font-size: 14px;
+  color: #8c8c8c;
+}
+#card-detail textarea {
+  border: none;
+  width: 500px;
+  color: #4d4d4d;
+  box-sizing: border-box;
+  resize: none;
+}
+#card-detail textarea:focus {
+  outline: none;
+}
+#card-detail .title-detail {
+  overflow: hidden;
+  padding: 20px 0 10px 0px;
+}
+#card-detail .title-detail a {
+  margin-left: 5px;
+  position: relative;
+  top: 7px;
+  display: inline-block;
+  color: #8c8c8c;
+  text-decoration: underline;
+  cursor: pointer;
+}
+#card-detail .title-detail textarea {
+  background: 0 0;
+  border-radius: 3px;
+  box-shadow: none;
+  font-size: 18px;
+  font-weight: 700;
+  height: 35px;
+  line-height: 22px;
+  margin: -4px -6px;
+  min-height: 22px;
+  padding: 4px 6px;
+  resize: none;
+}
+#card-detail .title-detail textarea:focus {
+  background: #fff;
+}
+#card-detail .detail-header {
+  padding-left: 50px;
+}
+#card-detail .detail-header .fa-close {
+  right: 0px;
+  top: 5px;
+  cursor: pointer;
+}
+#card-detail .detail-header .card-labels {
+  float: left;
+  max-width: 480px;
+}
+#card-detail .detail-header .card-label-box {
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  float: left;
+  margin: 0 4px 4px 0;
+}
+#card-detail .detail-header .due-date {
+  float: left;
+  position: relative;
+  background: #298fca;
+  padding: 9px 9px;
+  vertical-align: middle;
+  color: #fff;
+}
+#card-detail .detail-header .due-date p {
+  padding-left: 30px;
+}
+#card-detail .detail-header .due-date i {
+  color: #fff;
+  top: 2px;
+}
+#card-detail .detail-header .due-date a {
+  color: #fff;
+  font-size: 10px;
+}
+#card-detail .detail-list-info {
+  position: relative;
+  margin: 5px 0 15px 0;
+  padding-left: 3px;
+}
+#card-detail .fa {
+  position: absolute;
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+  width: 30px;
+  color: #999;
+}
+#card-detail .fa-eye {
+  left: 102px;
+  top: -6px;
+}
+#card-detail .fa-envelope-open {
+  left: 15px;
+  top: 18px;
+}
+#card-detail .detail-main {
+  float: left;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  margin: 0;
+  min-height: 20px;
+  padding: 8px 9px 9px 50px;
+  position: relative;
+  width: 529px;
+}
+#card-detail .detail-main .fa-close {
+  left: 85px;
+  cursor: pointer;
+}
+#card-detail .description {
+  margin: 0 0 30px 0;
+}
+#card-detail .description form {
+  display: none;
+  position: relative;
+  top: -23px;
+}
+#card-detail .description textarea {
+  font-size: 15px;
+  height: 100px;
+  padding: 5px 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.33);
+  margin-bottom: 5px;
+}
+#card-detail .description input[type="submit"] {
+  cursor: pointer;
+  background: -webkit-linear-gradient(top, #61bd4f 0, #5aac44 100%);
+  box-shadow: 0 1px 0 #3f6f21;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 18px;
+  font-size: 14px;
+}
+#card-detail .comments {
+  margin: 0 0 30px 0;
+}
+#card-detail .comments .fa-comment-o {
+  position: relative;
+  left: -143px;
+}
+#card-detail .comments textarea {
+  height: 70px;
+  font-size: 15px;
+  padding: 5px 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.33);
+  margin: 0 0 15px 0;
+}
+#card-detail .comments input[type="submit"] {
+  cursor: pointer;
+  background: -webkit-linear-gradient(top, #61bd4f 0, #5aac44 100%);
+  box-shadow: 0 1px 0 #3f6f21;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 18px;
+  font-size: 14px;
+}
+#card-detail .activity li {
+  border-bottom: 1px solid #cdd2d4;
+  margin: 0 0 20px 0;
+}
+#card-detail .activity:last-of-type {
+  border: none;
+}
+#card-detail .activity .fa-newspaper-o {
+  position: relative;
+  left: -92px;
+}
+#card-detail .activity p.comment-desc {
+  background: #fff;
+  padding: 10px;
+  margin: 0 0 15px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.33);
+}
+#card-detail .activity p.timestamp {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin: 0 0 10px 0;
+}
+#card-detail .activity a {
+  cursor: pointer;
+  margin-left: 10px;
+}
+#card-detail .detail-list-info p.move-list-action {
+  color: #8c8c8c;
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-block;
+}
+#card-detail .detail-sidebar {
+  float: right;
+  padding: 8px 9pt 9pt 0;
+  width: 140px;
+}
+#card-detail .detail-sidebar #pick-date {
+  position: relative;
+  cursor: pointer;
+}
+#card-detail .detail-sidebar .add-options .menu-button {
+  box-sizing: border-box;
+  color: #444;
+  font-weight: bold;
+  border: 1px solid #e2e4e6;
+  border-bottom-color: #cdd2d4;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #fff 0, #f8f9f9 100%);
+  cursor: pointer;
+  display: block;
+  height: 34px;
+  margin-top: 6px;
+  max-width: 300px;
+  padding: 9px 0 0 40px;
+  position: relative;
+}
+#card-detail .detail-sidebar .add-options .menu-button .fa-eye {
+  top: 0;
+}
+#card-detail .detail-sidebar .add-options .menu-button:hover {
+  background: #298fca;
+  border-color: #298fca #298fca #026aa7;
+  color: #fff;
+}
+#card-detail .detail-sidebar .add-options .menu-button:hover i {
+  color: #fff;
+}
+#card-detail .detail-sidebar .add-options .ui-datepicker-trigger {
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid #e2e4e6;
+  border-bottom-color: #cdd2d4;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #fff 0, #f8f9f9 100%);
+  cursor: pointer;
+  height: 34px;
+  margin: 0;
+  overflow: hidden;
+  padding: 8px 36px 8px 37px;
+  margin-top: 5px;
+  position: relative;
+  font-size: 14px;
+  color: #444;
+  font-weight: bold;
+}
+#card-detail .detail-sidebar .add-options .ui-datepicker-trigger:hover {
+  background: #298fca;
+  border-color: #298fca #298fca #026aa7;
+  color: #fff;
+}
+#card-detail .detail-sidebar .add-options .ui-datepicker-trigger:hover + i {
+  color: #fff;
+}
+#card-detail .detail-sidebar .add-options i {
+  left: 10px;
+  bottom: 0;
+}
+#card-detail .detail-sidebar .add-options i.fa-check {
+  left: 110px;
+  color: #5aac44;
+}
+#card-detail .detail-sidebar .add-options h3:last-of-type {
+  margin-top: 25px;
+}
+#card-detail .detail-sidebar .add-options input {
+  top: -35px;
+  height: 31px;
+  width: 135px;
+}
+#card-detail #copy-card {
+  top: 318px;
+  left: 577px;
+}
+#card-detail #copy-card p textarea,
+#card-detail #copy-card #copy-card-title textarea {
+  font-size: 14px;
+  width: 100%;
+  background-color: #e2e4e6;
+  border: 1px solid #cdd2d4;
+}
+#card-detail #move-card,
+#card-detail #copy-card {
+  position: absolute;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #d6dadc;
+  border-bottom-color: #c4c9cc;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  width: 310px;
+  padding: 10px;
+  z-index: 3;
+}
+#card-detail #move-card p,
+#card-detail #copy-card p {
+  text-align: center;
+  color: #8c8c8c;
+  margin: 10px 0;
+}
+#card-detail #move-card i.fa-close,
+#card-detail #copy-card i.fa-close {
+  cursor: pointer;
+  right: -5px;
+  top: 7px;
+}
+#card-detail #move-card div.select-div,
+#card-detail #copy-card div.select-div {
+  width: 100%;
+  height: 50px;
+  background: -webkit-linear-gradient(top, #fff 0, #f8f9f9 100%);
+  background: linear-gradient(to bottom, #fff 0, #f8f9f9 100%);
+  box-sizing: border-box;
+  border: 1px solid #e2e4e6;
+  border-bottom-color: #cdd2d4;
+  cursor: pointer;
+  margin-top: 6px;
+  overflow: hidden;
+  padding: 7px;
+  position: relative;
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+}
+#card-detail #move-card div.select-div span,
+#card-detail #copy-card div.select-div span {
+  font-weight: bold;
+  display: block;
+}
+#card-detail #move-card div.select-div span.label,
+#card-detail #copy-card div.select-div span.label {
+  color: #8c8c8c;
+  font-size: 9px;
+}
+#card-detail #move-card div.select-div span.value,
+#card-detail #copy-card div.select-div span.value {
+  color: #4d4d4d;
+  font-size: 18px;
+}
+#card-detail #move-card div.list-select,
+#card-detail #copy-card div.list-select {
+  display: inline-block;
+  margin-right: 10px;
+  width: 200px;
+}
+#card-detail #move-card div.position-select,
+#card-detail #copy-card div.position-select {
+  display: inline-block;
+  width: 78px;
+}
+#card-detail #move-card select,
+#card-detail #copy-card select {
+  cursor: pointer;
+  height: 50px;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+}
+#card-detail #move-card input[type="submit"],
+#card-detail #copy-card input[type="submit"] {
+  display: block;
+  margin: 5px 0 0 0;
+  cursor: pointer;
+  background: -webkit-linear-gradient(top, #61bd4f 0, #5aac44 100%);
+  box-shadow: 0 1px 0 #3f6f21;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 18px;
+  font-size: 14px;
+}
+#labels {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  width: 300px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #d6dadc;
+  border-bottom-color: #c4c9cc;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  padding: 10px;
+  color: #8c8c8c;
+}
+#labels i {
+  right: 0;
+  top: 10px;
+  cursor: pointer;
+}
+#labels p {
+  text-align: center;
+  line-height: 32px;
+}
+#labels a {
+  color: #8c8c8c;
+  text-decoration: underline;
+}
+#labels input[type="text"] {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  width: 100%;
+  background-color: #e2e4e6;
+  border: 1px solid #cdd2d4;
+  border-radius: 3px;
+  display: block;
+  margin-bottom: 9pt;
+  min-height: 2pc;
+  padding: 7px;
+  font-size: 14px;
+}
+#labels .label-bar {
+  cursor: pointer;
+  display: inline-block;
+  width: 238px;
+  height: 34px;
+  border-radius: 3px;
+  margin: 2px 5px 2px 0;
+  color: #fff;
+}
+#labels .label-bar p {
+  cursor: pointer;
+}
+#labels i.fa-pencil {
+  display: none;
+  text-align: center;
+  left: 0;
+  top: 0;
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+#labels i.fa-pencil:hover {
+  background: #cdd2d4;
+  border-radius: 3px;
+}
+#labels i.fa-trash {
+  text-align: center;
+  position: relative;
+  top: 0;
+  right: 0;
+}
+#labels i.fa-trash:hover {
+  background: #cdd2d4;
+  border-radius: 3px;
+}
+#labels div.new-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  box-sizing: border-box;
+  width: 300px;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #d6dadc;
+  border-bottom-color: #c4c9cc;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  padding: 10px;
+}
+#labels div.new-label i.fa-arrow-left {
+  left: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+#labels div.label-colors {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#labels ul {
+  margin-bottom: 20px;
+}
+#labels label[for="label-name"] {
+  margin-bottom: 5px;
+  display: block;
+}
+#labels label.ui-checkboxradio-label {
+  box-sizing: border-box;
+  margin: 5px;
+  width: 45px;
+  height: 36px;
+  float: left;
+}
+#labels label.ui-checkboxradio-label:before {
+  display: none;
+  font-family: fontAwesome;
+  position: relative;
+  top: 8px;
+  content: '\f00c';
+  color: #fff;
+  width: 45px;
+  height: 36px;
+}
+#labels input[type="radio"]:checked + label.ui-checkboxradio-label:before {
+  display: block;
+}
+#labels input[type="submit"] {
+  display: block;
+  cursor: pointer;
+  background: -webkit-linear-gradient(top, #61bd4f 0, #5aac44 100%);
+  box-shadow: 0 1px 0 #3f6f21;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 18px;
+  font-size: 14px;
+}
+#search {
+  white-space: initial;
+  position: absolute;
+  top: 0;
+  left: 113px;
+  width: 600px;
+  background: #e2e4e6;
+  border-radius: 3px;
+  border: 1px solid #d6dadc;
+  border-bottom-color: #c4c9cc;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  padding: 10px;
+}
+#search h3 {
+  color: #4d4d4d;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+#search div.search-result {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#search div.search-preview {
+  background: #fff;
+  width: 180px;
+  float: left;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#search div.search-preview p {
+  font-size: 13px;
+  color: #444;
+  cursor: pointer;
+}
+#search div.search-description {
+  width: 75%;
+  float: right;
+  width: 400px;
+  color: #444;
+}
+#search div.search-description p {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+#search div.search-description p + p {
+  font-weight: normal;
+  color: #8c8c8c;
+  margin: 0;
+}
+#search div.search-description p + p span {
+  font-weight: bold;
+}
+body {
+  font: 14px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+main {
+  position: fixed;
+  top: 40px;
+  background: #00aecc;
+  height: 100%;
+  width: 100vw;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+a {
+  text-decoration: none;
+}
+p {
+  cursor: default;
+}
+.red {
+  background: #f00;
+}
+.orange {
+  background: #ffa500;
+}
+.green {
+  background: #008000;
+}
+.blue {
+  background: #00f;
+}
+.yellow {
+  background: #ff0;
+}
+.purple {
+  background: #800080;
+}
+.brown {
+  background: #a52a2a;
+}
+.cyan {
+  background: #0ff;
+}
+.teal {
+  background: #008080;
+}
+.salmon {
+  background: #fa8072;
+}
+.grey {
+  background: #808080;
+}

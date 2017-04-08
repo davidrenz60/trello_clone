@@ -1,0 +1,26 @@
+<div class="list-header">
+  <h3>{{title}}</h3>
+  <textarea class="edit-title"></textarea>
+  <a class='list-actions-button'>...</a>
+  {{#if_equal subscribed true}}
+  <i class="fa fa-eye"></i>
+  {{/if_equal}}
+</div>
+<form class='add-card-form top'>
+  <textarea></textarea>
+  <input type="submit" value="Save">
+  <a class="cancel"><i class="fa fa-close"></i></a>
+</form>
+<ul class="cards"></ul>
+<div class="add-card">
+  <p>Add a card...</p>
+  <form class='add-card-form bottom'>
+    <textarea></textarea>
+    <input type="submit" value="Save">
+    <a class="cancel"><i class="fa fa-close"></i></a>
+  </form>
+</div>
+
+
+
+

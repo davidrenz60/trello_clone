@@ -1,0 +1,93 @@
+header
+  position: fixed
+  width: 100vw
+  overflow: hidden
+  height: 30px
+  background: colors.headerDark
+  padding: 5px 0
+  a
+    background: colors.headerLight
+    border-radius: 3px
+    display: inline-block
+    color: colors.headerText
+    font-weight: bold
+    line-height: 30px
+    height: 30px
+
+#header-left
+  float: left
+  margin-left: 5px
+  a.header-button-boards
+    padding: 0 0px 0 35px;
+    margin-right: 8px;
+    i
+      position: relative;
+      right: 76px;
+      top: 2px;
+      font-size: 20px;
+
+#header-search
+  float: left
+  position: relative
+  input
+    width: 175px
+    background: colors.headerLight
+    vertical-align: top
+    border: none
+    height: 30px
+    border-radius: 3px
+    font-size: 14px
+    padding: 0 7px
+    &:focus
+      width: 250px
+      outline: none
+      background: #ffffff
+      transition: width 200ms
+  i
+    position: absolute
+    top: 5px
+    right: 5px
+    font-size: 17px
+    color: colors.headerText
+
+#header-right
+  float: right
+  margin-right: 5px
+  a
+    margin-right: 8px
+    vertical-align: top
+    &:last-of-type
+      margin-right: 0
+  a.header-button-plus
+    box-sizing: border-box
+    width: 30px
+    font-weight: 100
+    font-size: 33px
+    line-height: 23px
+    text-align: center
+  a.header-button-user
+    padding-right: 8px
+  a.header-button-info,
+  a.header-button-alerts
+    width: 30px
+    text-align: center
+    font-size: 19px;
+    line-height: 29px;
+  #user-icon
+    display: inline-block
+    text-align: center
+    background: colors.listBg
+    color: colors.listDarkGrey
+    width: 30px
+    height: 100%
+    border-top-left-radius: 3px
+    border-bottom-left-radius: 3px
+    margin-right: 8px
+
+.header-logo
+  position: absolute
+  left: 48%
+  display: inline-block
+  height: 30px
+  width: 80px
+  background: url('/images/header-logo.png') 0 0 no-repeat

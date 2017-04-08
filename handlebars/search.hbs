@@ -1,0 +1,16 @@
+<h3>Cards</h3>
+{{#if cards}}
+{{#each cards}}
+<div class="search-result">
+  <div class="search-preview" data-listId="{{listId}}"" data-position="{{position}}">
+    <p>{{description}}</p>
+  </div>
+  <div class="search-description">
+    <p>{{description}}</p>
+    <p>In list: <span>{{listName}}</span> on My Board</p>
+  </div>
+</div>
+{{/each}}
+{{else}}
+<p>No cards found...</p>
+{{/if}}

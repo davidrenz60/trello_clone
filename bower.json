@@ -1,0 +1,26 @@
+{
+  "name": "trello_clone",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "David Renz <davidrenz60@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "backbone": "^1.3.3",
+    "underscore": "^1.8.3",
+    "handlebars": "^4.0.5",
+    "jquery-ui": "^1.12.1",
+    "moment": "^2.18.1"
+  }
+}

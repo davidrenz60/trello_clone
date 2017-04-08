@@ -1,0 +1,110 @@
+#labels
+  position: absolute
+  z-index: 2
+  top: 0
+  width: 300px
+  box-sizing: border-box
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #d6dadc;
+  border-bottom-color: #c4c9cc;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  padding: 10px
+  color: #8c8c8c
+  i
+    right: 0
+    top: 10px
+    cursor: pointer
+  p
+    text-align: center
+    line-height: 32px
+  a
+    color: #8c8c8c
+    text-decoration: underline
+  input[type="text"]
+    box-sizing: border-box
+    -webkit-appearance: none
+    width: 100%
+    background-color: #E2E4E6
+    border: 1px solid #CDD2D4
+    border-radius: 3px
+    display: block
+    margin-bottom: 9pt
+    min-height: 2pc
+    padding: 7px
+    font-size: 14px
+  .label-bar
+    cursor: pointer
+    display: inline-block
+    width: 238px
+    height: 34px;
+    border-radius: 3px
+    margin: 2px 5px 2px 0
+    color: #ffffff
+    p
+      cursor: pointer
+
+  i.fa-pencil
+    display: none
+    text-align: center
+    left: 0
+    top: 0
+    position: relative
+    width: 30px
+    height: 30px
+    &:hover
+      background: colors.listGreyHover
+      border-radius: 3px
+  i.fa-trash
+    text-align: center
+    position: relative;
+    top: 0;
+    right: 0
+    &:hover
+      background: colors.listGreyHover
+      border-radius: 3px
+  div.new-label
+    position: absolute
+    top: 0
+    left: 0
+    display: none
+    box-sizing: border-box
+    width: 300px
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #d6dadc;
+    border-bottom-color: #c4c9cc;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    padding: 10px
+    i.fa-arrow-left
+      left: 10px
+      top: 10px
+      cursor: pointer
+  div.label-colors
+    overflow: hidden
+    margin-bottom: 10px
+  ul
+    margin-bottom: 20px
+  label[for="label-name"]
+    margin-bottom: 5px
+    display: block
+  label.ui-checkboxradio-label
+    box-sizing: border-box
+    margin: 5px
+    width: 45px
+    height: 36px
+    float: left
+    &:before
+      display: none
+      font-family: fontAwesome
+      position: relative
+      top: 8px
+      content: '\f00c'
+      color: #ffffff
+      width: 45px
+      height: 36px
+  input[type="radio"]:checked + label.ui-checkboxradio-label:before
+    display: block
+  input[type="submit"]
+    display: block
+    submitButton()

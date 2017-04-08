@@ -1,0 +1,13 @@
+mixin stylesheet_link_tag(src)
+  link(rel='stylesheet' href='/stylesheets/' + src + '.css')
+
+mixin jquery_css_tag
+ link(rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css")
+
+mixin font_awesome_link_tag
+  link(rel="stylesheet" href="/stylesheets/font-awesome/css/font-awesome.min.css")
+
+mixin javascript_include_tag(src, ...rest)
+  script(type="text/javascript" src="/javascripts/" + src + ".js")
+  each file in rest
+    script(type="text/javascript" src="/javascripts/" + file + ".js")

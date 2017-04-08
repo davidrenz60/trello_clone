@@ -1,0 +1,10 @@
+{{#each cards}}
+<li class="card" position-id={{position}}>
+  <p>{{title}}<i class="fa fa-pencil"></i></p>
+  <div class="card-icons">
+    {{#if_equal subscribed true}}
+    <i class="fa fa-eye"><i>
+    {{/if_equal}}
+  </div>
+</li>
+{{/each}}

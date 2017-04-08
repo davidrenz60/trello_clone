@@ -1,0 +1,46 @@
+ul.cards
+  min-height: 6px
+  p
+    cursor: pointer
+    position: relative
+    color: colors.listTitle
+    padding: 0 20px 10px 0
+    i
+      opacity: 0
+      text-align: center;
+      line-height: 20px;
+      width: 22px;
+      height: 22px;
+      position: absolute;
+      right: 0px;
+      top: -3px;
+      background: #f00;
+      &:hover
+        opacity: 1
+        background: colors.listGreyHover
+        border-radius: 3px
+  li
+    cursor: pointer
+    border-bottom: 1px solid #ccc;
+    border-radius: 3px
+    margin: 0 8px 6px 8px
+    padding: 6px
+    background: #ffffff
+    &:hover
+      background: colors.cardBgHover
+  div.card-icons
+    padding-left: 5px
+    i
+      color: colors.listAddText
+      margin-right: 20px
+      span
+        font: font
+        font-size: 13px
+        font-weight: 300
+        margin-left: 5px
+
+  .sortable-placeholder-card
+    background: rgba(0, 0, 0, .15)
+    width: 246px
+    display: inline-block
+    margin: 2px 5px

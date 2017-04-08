@@ -1,0 +1,185 @@
+#lists-container
+  position: relative
+  top: 45px
+
+  div#add-list
+    width: 270px
+    box-sizing: border-box
+    position: relative
+    vertical-align: top
+    cursor: pointer
+    display: inline-block
+    background: colors.addList
+    color: colors.addListText
+    margin: 0 5px
+    padding: 10px
+    border-radius: 3px
+    &:hover
+      background: colors.addListHover
+      transition: background 100ms
+    form.add-list-form
+      display: none
+      cursor: default
+      position: absolute
+      top: 0
+      left: 0
+      box-sizing: border-box
+      width: 270px
+      padding: 3px
+      background: colors.listBg
+      border-radius: 3px
+      input[type="text"]
+        display: block
+        width: 264px
+        height: 30px
+        margin: 0 auto 5px auto
+        textInput()
+      input[type="submit"]
+        submitButton()
+      a
+        cursor: pointer
+        color: colors.listAddText
+        font-size: 25px
+        margin-left: 11px
+        vertical-align: middle
+
+#lists
+  float: left
+  white-space: nowrap
+  & *
+    white-space: initial
+  div.list
+    width: 270px
+    box-sizing: border-box
+    position: relative
+    display: inline-block
+    vertical-align: top
+    background: colors.listBg
+    border-radius: 3px
+    margin: 0 5px
+    div.list-actions-menu
+      position: absolute
+      z-index: 2
+      top: 32px
+      right: -270px
+      width: 300px
+      background: #ffffff
+      border: 1px solid #cccccc
+      border-radius: 3px
+      box-shadow: 0 1px 6px rgba(0,0,0,.1)
+      p
+        color: colors.listTextLight
+        text-align: center
+        margin-top: 10px
+      i
+        float: right
+        margin-right: 5px
+        cursor: pointer
+        width: 20px
+        height: 20px
+      li
+        padding: 6px 10px
+        cursor: pointer
+        &:hover
+          background: #298FCA
+          color: #ffffff
+      ul
+        color: colors.listTitle
+        font-weight: bold
+      hr
+        background: #D6DADC;
+        border: 0;
+        color: #D6DADC;
+        height: 1px;
+        margin: 9pt 0;
+        width: 100%;
+
+  div.list-header
+    overflow: hidden
+    padding: 8px 10px
+    h3
+      float: left
+      line-height: 24px
+      color: colors.listTitle
+      cursor: pointer
+    textarea
+      display: none
+      position: absolute;
+      left: 8px;
+      width: 195px;
+      height: 18px;
+      -webkit-appearance: none;
+      border: none;
+      border-radius: 3px
+      font-size: 14px;
+      font-weight: bold
+      color: colors.listTitle
+      resize: none;
+      outline: none
+    a
+      text-align: center
+      width: 25px
+      height: 25px
+      float: right
+      color: colors.listDots
+      &:hover
+        background: colors.listGreyHover
+        border-radius: 3px
+        cursor: default
+    i
+      float: right
+      line-height: 23px
+      margin-right: 5px
+      color: colors.listTextLight
+  div.add-card
+    position: relative
+    padding: 8px 10px
+    color: colors.listAddText
+    cursor: pointer
+    &:hover
+      background: colors.listGreyHover
+      p
+        text-decoration: underline
+        color: colors.listText
+  form.add-card-form
+    display: none
+    cursor: default
+    position: absolute
+    top: 0
+    left: 0
+    box-sizing: border-box
+    width: 270px
+    padding: 3px
+    background: colors.listBg
+    border-radius: 3px
+    textarea
+      -webkit-appearance: none;
+      display: block
+      box-sizing: border-box
+      width: 255px
+      height: 60px
+      margin: 0 auto 5px auto
+      border: none;
+      border-radius: 3px
+      font-size: 14px;
+      color: colors.listTitle
+      outline: none
+    input[type="submit"]
+      submitButton()
+    a
+      cursor: pointer
+      color: colors.listAddText
+      font-size: 25px
+      margin-left: 11px
+      vertical-align: middle
+  form.add-card-form.top
+    position: initial
+
+.sortable-placeholder
+  background: rgba(0, 0, 0, .25)
+  border-radius: 3px
+  display: inline-block
+  width: 270px
+  margin: 0 5px
+
+

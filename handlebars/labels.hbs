@@ -1,0 +1,67 @@
+<div class="pick-label">
+  <i class="fa fa-close"></i>
+  <p>Labels</p>
+  <hr>
+  <input type="text" id="label-search" placeholder="Search Labels...">
+  <ul>
+    {{#each AllLabels}}
+    <li>
+      <div class="label-bar {{color}}" data-color="{{color}}">
+        <p>{{title}}</p>
+      </div>
+      <i class="fa fa-trash"></i>
+      <i class="fa fa-pencil"></i>
+    </li>
+    {{/each}}
+  </ul>
+  <a class="create-label" href="#">Create a new label</a>
+</div>
+<div class="new-label">
+  <i class="fa fa-arrow-left"></i>
+  <i class="fa fa-close"></i>
+  <p>Create Label</p>
+  <hr>
+  <form>
+    <label for="label-name">Name</label>
+    <input type="text" id="label-name">
+    <p>Select a color...</p>
+    <div class="label-colors">
+      <input type="radio" name="label-color" id="color-red" value="red">
+      <label class="red" for="color-red"></label>
+
+      <input type="radio" name="label-color" id="color-orange" value="orange">
+      <label class="orange" for="color-orange"></label>
+
+      <input type="radio" name="label-color" id="color-green" value="green">
+      <label class="green" for="color-green"></label>
+
+      <input type="radio" name="label-color" id="color-blue" value="blue">
+      <label class="blue" for="color-blue"></label>
+
+      <input type="radio" name="label-color" id="color-yellow" value="yellow">
+      <label class="yellow" for="color-yellow"></label>
+
+      <input type="radio" name="label-color" id="color-purple" value="purple">
+      <label class="purple" for="color-purple"></label>
+
+      <input type="radio" name="label-color" id="color-brown" value="brown">
+      <label class="brown" for="color-brown"></label>
+
+      <input type="radio" name="label-color" id="color-cyan" value="cyan">
+      <label class="cyan" for="color-cyan"></label>
+
+      <input type="radio" name="label-color" id="color-teal" value="teal">
+      <label class="teal" for="color-teal"></label>
+
+      <input type="radio" name="label-color" id="color-salmon" value="salmon">
+      <label class="salmon" for="color-salmon"></label>
+
+      <input type="radio" name="label-color" id="color-grey" value="grey">
+      <label class="grey" for="color-grey"></label>
+    </div>
+    <input type="submit" value="Create">
+  </form>
+</div>
+
+
+

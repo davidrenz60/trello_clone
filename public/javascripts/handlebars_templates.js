@@ -30,7 +30,7 @@ this["JST"]["cardDetail"] = Handlebars.template({"1":function(container,depth0,h
     + alias3(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
     + "</p><p class=\"timestamp\">"
     + alias3((helpers.format_timestamp || (depth0 && depth0.format_timestamp) || alias2).call(alias1,(depth0 != null ? depth0.timestamp : depth0),{"name":"format_timestamp","hash":{},"data":data}))
-    + "</p></li>";
+    + "</p><a href=\"#\" class=\"delete-comment\">Delete</a></li>";
 },"10":function(container,depth0,helpers,partials,data) {
     var alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression;
 

@@ -21,7 +21,6 @@ var MoveAllCardsView = Backbone.View.extend({
     }
 
     cards.forEach(function(card) {
-      debugger;
       card.get('activities').add({
         cardMove: true,
         to: title,

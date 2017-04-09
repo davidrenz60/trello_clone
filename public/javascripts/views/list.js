@@ -14,7 +14,6 @@ var ListView = Backbone.View.extend({
   },
 
   newCard: function(e) {
-    debugger;
     e.preventDefault();
     var title = $(e.target).find('textarea').val();
 

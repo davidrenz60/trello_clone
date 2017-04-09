@@ -33,6 +33,5 @@ var Card = Backbone.Model.extend({
   initialize: function(options) {
     this.setLabels(options.labels);
     this.setActivities(options.activities);
-    debugger;
   },
 });

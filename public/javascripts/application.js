@@ -57,7 +57,6 @@ var App = {
   },
 
   addCard: function(model, targetId, newIndex) {
-    debugger;
     var cards = App.lists.get(targetId).view.cards;
     cards.add(model, { at: newIndex });
     this.updateSortOrder(cards);

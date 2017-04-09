@@ -17,6 +17,19 @@ var CardDetailView = Backbone.View.extend({
     'click a.copy': 'openCopyCardView',
     'click .move-list-action': 'openMoveListView',
     'submit .add-comment': 'addComment',
+    'click a.delete-comment': 'deleteComment',
+  },
+
+  deleteComment: function(e) {
+    e.preventDefault();
+    var index = $(e.taget).closest('li').index();
+    var activities = this.model.get('activities');
+    var comment = activities.at(index);
+
+    activities.remove(comment);
+    this.model.set('commentCount', this.model.get('commentCount') - 1);
+    this.syncCards();
+    this.render();
   },
 
   addComment: function(e) {
@@ -164,7 +177,6 @@ var CardDetailView = Backbone.View.extend({
   },
 
   render: function() {
-    debugger;
     var context = this.model.toJSON();
     context.activities = this.model.get('activities').toJSON();
     context.labels = this.model.get('labels').toJSON();

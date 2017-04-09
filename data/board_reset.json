@@ -12,12 +12,12 @@
      "title": "list one",
      "subscribed": false,
      "cards": [{
-        "title": "card one in list one, position 0",
+        "title": "card one in list one",
         "subscribed": false,
         "position": 0,
         "description": "A description for this card"
       }, {
-        "title": "card two in list one, position 1",
+        "title": "card two in list one",
         "subscribed": false,
         "position": 1,
         "commentCount": 2,

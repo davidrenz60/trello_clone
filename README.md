@@ -6,6 +6,7 @@
 * Search for cards by title
 * New labels can be created or deleted to be used for each card 
 * Labels can be selected and edited for each card
+* Labels can be searched by title
 * Due dates can be set or removed for a card
 * Comments for cards
 * Activity feed for each card

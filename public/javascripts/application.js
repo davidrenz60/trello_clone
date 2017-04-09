@@ -57,6 +57,7 @@ var App = {
   },
 
   addCard: function(model, targetId, newIndex) {
+    debugger;
     var cards = App.lists.get(targetId).view.cards;
     cards.add(model, { at: newIndex });
     this.updateSortOrder(cards);
@@ -87,7 +88,7 @@ var App = {
     $el.val('');
 
     setTimeout(function() {
-      App.$el.find("#search").remove();
+      App.$header.find("#search").remove();
     }, 100);
   },
 

@@ -118,6 +118,14 @@ var LabelsView = Backbone.View.extend({
       context = App.labels.toJSON();
     }
 
+    this.model.get('labels').forEach(function(label) {
+      var existingLabel = _.findWhere(context, label.toJSON());
+      if (existingLabel) {
+        existingLabel.selected = true;
+      }
+
+    });
+
     $('#labels').remove();
     this.delegateEvents();
     this.$el.html(this.template({ AllLabels: context }));

@@ -18,12 +18,19 @@ var MoveCardView = Backbone.View.extend({
     var position = +$el.find('#select-position :selected').val();
     var removedId = this.originalList.get('id');
     var newId = this.list.get('id');
+    var moveActivity = {
+          title: this.model.get('title'),
+          cardMove: true,
+          from: this.originalList.get('title'),
+          to: listTitle,
+          href: Backbone.history.fragment,
+        };
 
-    this.model.get('activities').add({
-      cardMove: true,
-      from: this.originalList.get('title'),
-      to: listTitle,
-    });
+    this.model.get('activities').add(moveActivity);
+
+    if (this.model.get('subscribed')) {
+      App.notifications.add(moveActivity);
+    }
 
     App.trigger('remove_card', this.model, removedId);
     App.trigger('add_card', this.model, newId, position);

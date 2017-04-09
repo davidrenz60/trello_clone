@@ -17,8 +17,10 @@ var CopyCardView = Backbone.View.extend({
     var title = $(e.target).find('textarea').val();
     var position = +$el.find('#select-position :selected').val();
     var newId = this.list.get('id');
-    var newModel = this.model.clone();
 
+    if (!title) { return; }
+
+    var newModel = this.model.clone();
     newModel.set('title', title);
     App.trigger('add_card', newModel, newId, position);
 

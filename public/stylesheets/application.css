@@ -6,6 +6,7 @@ header {
   height: 30px;
   background: #0094ae;
   padding: 5px 0;
+  z-index: 1;
 }
 header a {
   background: #4cb4c6;
@@ -921,6 +922,7 @@ ul.cards .sortable-placeholder-card {
   font-size: 14px;
 }
 #labels .label-bar {
+  position: relative;
   cursor: pointer;
   display: inline-block;
   width: 238px;
@@ -931,6 +933,12 @@ ul.cards .sortable-placeholder-card {
 }
 #labels .label-bar p {
   cursor: pointer;
+}
+#labels i.fa-check {
+  color: #fff;
+  position: absolute;
+  left: 15px;
+  top: 2px;
 }
 #labels i.fa-pencil {
   display: none;
@@ -1018,8 +1026,8 @@ ul.cards .sortable-placeholder-card {
 }
 #search {
   white-space: initial;
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 40px;
   left: 113px;
   width: 600px;
   background: #e2e4e6;
@@ -1097,6 +1105,7 @@ ul.cards .sortable-placeholder-card {
   right: 17px;
   color: #8c8c8c;
   font-size: 20px;
+  cursor: pointer;
 }
 #notifications a {
   display: block;
@@ -1108,6 +1117,8 @@ ul.cards .sortable-placeholder-card {
 }
 #notifications span {
   text-decoration: underline;
+  color: #444;
+  font-weight: bold;
 }
 html {
   height: 100%;

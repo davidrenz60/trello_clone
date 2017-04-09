@@ -50,8 +50,6 @@ module.exports = function(router) {
 
   // add a card to a list or reset all cards for a list
   router.post('/lists/:id/cards', function(req, res) {
-    console.log(req.body);
-    console.log(req.params);
     var lists = Board.getLists();
     var listId = +req.params.id;
     var currentCards = _(lists).findWhere({ id: listId }).cards;

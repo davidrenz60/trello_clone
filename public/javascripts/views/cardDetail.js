@@ -19,8 +19,6 @@ var CardDetailView = Backbone.View.extend({
     'submit .add-comment': 'addComment',
   },
 
-
-
   addComment: function(e) {
     e.preventDefault();
     var text = $(e.target).find('textarea').val();
@@ -116,17 +114,39 @@ var CardDetailView = Backbone.View.extend({
   getDate: function(e) {
     if (!e) { return; }
     var date = new Date(e);
+    var dateActivity = {
+      setDueDate: true,
+      date: date,
+      href: Backbone.history.fragment,
+      title: this.model.get('title'),
+    };
 
     this.model.set('dueDate', date);
-    this.model.get('activities').add({ setDueDate: true, date: date });
+    this.model.get('activities').add(dateActivity);
+
+    if (this.model.get('subscribed')) {
+      App.notifications.add(dateActivity);
+    }
+
     this.syncCards();
     this.render();
   },
 
   removeDueDate: function(e) {
     e.preventDefault();
+    var removeDateActivity = {
+      removeDueDate: true,
+      href: Backbone.history.fragment,
+      title: this.model.get('title'),
+    };
+
     this.model.unset('dueDate');
-    this.model.get('activities').add({ removeDueDate: true });
+    this.model.get('activities').add(removeDateActivity);
+
+     if (this.model.get('subscribed')) {
+      App.notifications.add(removeDateActivity);
+    }
+
     this.syncCards();
     this.render();
   },
@@ -144,6 +164,7 @@ var CardDetailView = Backbone.View.extend({
   },
 
   render: function() {
+    debugger;
     var context = this.model.toJSON();
     context.activities = this.model.get('activities').toJSON();
     context.labels = this.model.get('labels').toJSON();

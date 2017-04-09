@@ -5,9 +5,9 @@ var SearchView = Backbone.View.extend({
   },
 
   render: function() {
-    App.$el.find('#search').remove();
+    App.$header.find('#search').remove();
     this.$el.html(this.template({ cards: this.cards}));
-    this.$el.appendTo(App.$el);
+    this.$el.appendTo(App.$header);
   },
 
   initialize: function(options) {

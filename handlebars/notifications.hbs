@@ -5,49 +5,22 @@
   {{#each notifications}}
     {{#if comment}}
       <li>
-        <a href="/{{href}}">{{title}} was commented on.</a>
+        <a href="/{{href}}"><span>{{title}}</span> was commented on</a>
       </li>
     {{/if}}
     {{#if setDueDate}}
       <li>
-        <a href="list/{{listId}}/card{{position}}">A due date of {{format_date date}} was set for {{title}}.</a>
+        <a href="/{{href}}">A due date of {{format_date date}} was set for <span>{{title}}</span></a>
       </li>
     {{/if}}
     {{#if removeDueDate}}
       <li>
-        <a href="list/{{listId}}/card{{position}}">The due date for {{title}} was removed</a>
+        <a href="{{href}}">The due date for <span>{{title}}</span> was removed</a>
       </li>
     {{/if}}
     {{#if cardMove}}
       <li>
-        <a href="list/{{listId}}/card{{position}}">{{title}} was moved from {{from}} to{{to}}</a>
+        <a href="{{href}}"><span>{{title}}</span> was moved from <span>{{from}}</span> to <span>{{to}}</span></a>
       </li>
     {{/if}}
   {{/each}}
-
-
-
-{{!-- {{#if comment}}
-        <li class="activity comment">
-          <p class="comment-desc">{{text}}</p>
-          <p class="timestamp">{{format_timestamp timestamp}}</p>
-        </li>
-        {{/if}}
-        {{#if setDueDate}}
-        <li class="activity setDueDate">
-          <p class="action-desc">The due date was set to {{format_date date}}</p>
-          <p class="timestamp">{{format_timestamp timestamp}}</p>
-        </li>
-        {{/if}}
-        {{#if removeDueDate}}
-        <li class="activity removeDueDate">
-          <p class="action-desc">The due date was removed</p>
-          <p class="timestamp">{{format_timestamp timestamp}}</p>
-        </li>
-        {{/if}}
-        {{#if cardMove}}
-        <li class="activity cardMove">
-          <p class="action-desc">this card was moved from <span>{{from}}</span> to <span>{{to}}</span></p>
-          <p class="timestamp">{{format_timestamp timestamp}}</p>
-        </li>
-        {{/if}} --}}

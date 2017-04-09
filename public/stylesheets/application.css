@@ -105,6 +105,16 @@ header a {
   width: 80px;
   background: url("/images/header-logo.png") 0 0 no-repeat;
 }
+i.fa-exclamation-circle {
+  display: none;
+  position: absolute;
+  top: 1px;
+  right: 27px;
+  width: 10px;
+  height: 30px;
+  color: #f00;
+  font-size: 16px;
+}
 #board-header {
   position: fixed;
   top: 40px;
@@ -1060,6 +1070,44 @@ ul.cards .sortable-placeholder-card {
 }
 #search div.search-description p + p span {
   font-weight: bold;
+}
+#notifications {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 475px;
+  height: 500px;
+  background: #e2e4e6;
+  border-radius: 3px;
+  border: 1px solid #d6dadc;
+  border-bottom-color: #c4c9cc;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  padding: 10px;
+}
+#notifications h3 {
+  text-align: center;
+  color: #8c8c8c;
+  font-weight: normal;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+#notifications i {
+  position: absolute;
+  top: 11px;
+  right: 17px;
+  color: #8c8c8c;
+  font-size: 20px;
+}
+#notifications a {
+  display: block;
+  color: #4d4d4d;
+  padding: 8px;
+  margin: 10px 0;
+  background: #fff;
+  border-radius: 3px;
+}
+#notifications span {
+  text-decoration: underline;
 }
 html {
   height: 100%;

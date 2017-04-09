@@ -14,10 +14,11 @@ html
 
   +javascript_include_tag('application')
   +javascript_include_tag('models/list', 'models/card', 'models/activity', 'models/label')
-  +javascript_include_tag('collections/lists', 'collections/cards', 'collections/activities', 'collections/labels')
-  +javascript_include_tag('views/list', 'views/addList', 'views/listActions', 'views/cards', 'views/moveAllCards', 'views/cardDetail', 'views/moveCard', 'views/copyCard', 'views/labels', 'views/search')
+  +javascript_include_tag('collections/lists', 'collections/cards', 'collections/activities', 'collections/labels', 'collections/notifications')
+  +javascript_include_tag('views/list', 'views/addList', 'views/listActions', 'views/cards', 'views/moveAllCards', 'views/cardDetail', 'views/moveCard', 'views/copyCard', 'views/labels', 'views/search', 'views/notifications')
   script(type="text/javascript").
     App.lists = new Lists(!{JSON.stringify(lists)});
     App.labels = new Labels(!{JSON.stringify(labels)});
+    App.notifications = new Notifications();
     App.init();
   +javascript_include_tag('router')

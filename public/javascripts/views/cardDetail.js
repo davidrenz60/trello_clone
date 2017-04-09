@@ -19,13 +19,25 @@ var CardDetailView = Backbone.View.extend({
     'submit .add-comment': 'addComment',
   },
 
+
+
   addComment: function(e) {
     e.preventDefault();
     var text = $(e.target).find('textarea').val();
-    var comment = new Activity({ text: text, comment: true });
+    var comment = new Activity({
+      text: text,
+      comment: true,
+      title: this.model.get('title'),
+      href: Backbone.history.fragment,
+    });
 
     this.model.get('activities').add(comment);
     this.model.set('commentCount', (this.model.get('commentCount') + 1));
+
+    if (this.model.get('subscribed')) {
+      App.notifications.add(comment);
+    }
+
     this.syncCards();
     this.render();
   },

@@ -103,6 +103,15 @@ var App = {
     new SearchView({ cards: results });
   },
 
+  openNotifications: function(e) {
+    e.preventDefault();
+    new NotificationsView({ collection: App.notifications });
+  },
+
+  alertNotification: function() {
+    this.$header.find('.fa-exclamation-circle').show();
+  },
+
   bindEvents: function() {
     _.extend(this, Backbone.Events);
 
@@ -119,6 +128,8 @@ var App = {
     this.$search.on('focus', this.openSearchView);
     this.$search.on('blur', this.closeSearchView);
     this.$search.on('keyup', this.searchAllCards);
+    this.$header.find('a.header-button-alerts').on('click', this.openNotifications);
+    this.listenTo(this.notifications, 'add', this.alertNotification);
   },
 };
 

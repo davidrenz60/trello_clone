@@ -1,6 +1,7 @@
 # Trello Clone
 
 ### Features
+* Single Page application. All routing using Backbone router
 * Cards and Lists can be created, deleted, copied or rearranged using drag and drop feature
 * Fully editable titles and descriptions
 * Search for cards by title

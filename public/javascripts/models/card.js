@@ -26,7 +26,7 @@ var Card = Backbone.Model.extend({
     if (activities) {
       this.set('activities', new Activities(activities));
     } else {
-      this.set('labels', new Activities([]));
+      this.set('activities', new Activities([]));
     }
   },
 

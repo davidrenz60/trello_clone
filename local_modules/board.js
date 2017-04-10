@@ -57,23 +57,7 @@ var Board = {
     return JSON.parse(fs.readFileSync(this.file_path, 'utf-8')).lastListId;
   },
 
-  addCardToList: function(currentCards, id) {
-    var data;
-    var lists = this.getLists();
-    var labels = this.getLabels();
-
-    _(lists).findWhere({ id: id }).cards = currentCards;
-
-    data = {
-      labels: labels,
-      lastListId: this.getLastListId(),
-      lists: lists,
-    };
-
-    fs.writeFileSync(this.file_path, JSON.stringify(data), 'utf8');
-  },
-
-  resetAllCardsForList: function(cards, id) {
+  setCardsForList: function(cards, id) {
     var data;
     var lists = this.getLists();
     var labels = this.getLabels();

@@ -18,7 +18,7 @@
         "description": "A description for this card"
       }, {
         "title": "card two in list one",
-        "subscribed": false,
+        "subscribed": true,
         "position": 1,
         "commentCount": 2,
         "activities": [{

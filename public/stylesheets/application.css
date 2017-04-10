@@ -586,8 +586,9 @@ ul.cards .sortable-placeholder-card {
   color: #999;
 }
 #card-detail .fa-eye {
-  left: 102px;
-  top: -6px;
+  position: relative;
+  left: 5px;
+  top: 3px;
 }
 #card-detail .fa-envelope-open {
   left: 15px;
@@ -725,7 +726,9 @@ ul.cards .sortable-placeholder-card {
   position: relative;
 }
 #card-detail .detail-sidebar .add-options .menu-button .fa-eye {
-  top: 0;
+  position: absolute;
+  left: 7px;
+  top: 1px;
 }
 #card-detail .detail-sidebar .add-options .menu-button:hover {
   background: #298fca;

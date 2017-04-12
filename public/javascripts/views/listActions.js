@@ -32,28 +32,24 @@ var ListActionsView = Backbone.View.extend({
   },
 
   toggleSubscribe: function() {
-    this.model.set('subscribed', !this.model.get('subscribed'));
-    this.model.save();
+    App.trigger('list_update', this.model, { subscribed: !this.model.get('subscribed') });
     this.remove();
   },
 
   destroyList: function() {
-    this.model.view.remove();
-    this.remove();
     this.model.destroy();
+    this.remove();
   },
 
   copyList: function() {
-    var model;
-    var modelCopy = this.model.toJSON();
-    delete modelCopy.id;
+    var clone = this.model.clone();
+    clone.unset("id");
 
-    model = new List(modelCopy);
-
-    model.save(null, {
-      success: function() {
-        App.lists.add(model);
-        new ListView({ model: model });
+    clone.save(null, {
+      success: function(res) {
+        var list = new List(res.attributes); // wait for id so card collection listId property can be set
+        App.lists.add(list);
+        new ListView({ model: list });
       }
     });
 

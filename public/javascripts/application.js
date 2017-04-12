@@ -16,17 +16,29 @@ var App = {
       new ListView({ model: list });
     });
 
-    new AddListView({ collection: this.lists });
+    new AddListView();
   },
 
-  cardDetailView: function(listId, position) {
+  openCardView: function(listId, position) {
     var card = this.lists.getCard(listId, position);
-    this.cardView = new CardDetailView({ model: card, listId: listId });
+    this.cardView = new CardView({ model: card, listId: listId });
   },
 
-  closeCardDetailView: function() {
+  closeCardView: function() {
     this.$modalLayer.hide();
     this.cardView.close();
+  },
+
+  saveList: function(model, attr) {
+    var cards = model.get('cards');
+
+    // reset cards to a collection (cards were reset to an array with save)
+     model.save(attr, {
+        success: function() {
+          model.set('cards', cards);
+          model.trigger('list_change');
+        }
+      });
   },
 
   updateListPositions: function(e, ui) {
@@ -37,27 +49,27 @@ var App = {
     this.lists.sync('create', this.lists);
   },
 
-  moveAllCards: function(model, targetId) {
-    var cards = model.view.cards;
-    var target = this.lists.get(targetId).view.cards;
+  moveAllCards: function(removedId, targetId) {
+    var removeCards = this.lists.getCardsFor(removedId);
+    var targetCards = this.lists.getCardsFor(targetId);
 
-    cards.each(function(card) {
-      target.add(card);
+    removeCards.each(function(card) {
+      targetCards.add(card);
     });
 
-    cards.reset();
-    this.updateSortOrder(target);
-    this.updateSortOrder(cards);
+    removeCards.reset();
+    this.updateSortOrder(removeCards);
+    this.updateSortOrder(targetCards);
   },
 
   removeCard: function(model, removedId) {
-    var cards = App.lists.get(removedId).view.cards;
+    var cards = App.lists.getCardsFor(removedId);
     cards.remove(model);
     this.updateSortOrder(cards);
   },
 
   addCard: function(model, targetId, newIndex) {
-    var cards = App.lists.get(targetId).view.cards;
+    var cards = App.lists.getCardsFor(targetId);
     cards.add(model, { at: newIndex });
     this.updateSortOrder(cards);
   },
@@ -112,6 +124,12 @@ var App = {
     this.$header.find('.fa-exclamation-circle').show();
   },
 
+  addNotification: function(model, activity) {
+    if (model.get('subscribed')) {
+      this.notifications.add(activity);
+    }
+  },
+
   bindEvents: function() {
     _.extend(this, Backbone.Events);
 
@@ -121,19 +139,19 @@ var App = {
       stop: this.updateListPositions.bind(this),
     });
 
+    this.on('list_update', this.saveList);
     this.on('move_all_cards', this.moveAllCards);
     this.on('remove_card', this.removeCard);
     this.on('add_card', this.addCard);
     this.on('cards_reordered', this.reorderCards);
+    this.on('activity', this.addNotification);
+    this.listenTo(this.notifications, 'add', this.alertNotification);
     this.$search.on('focus', this.openSearchView);
     this.$search.on('blur', this.closeSearchView);
     this.$search.on('keyup', this.searchAllCards);
     this.$header.find('a.header-button-alerts').on('click', this.openNotifications);
-    this.listenTo(this.notifications, 'add', this.alertNotification);
   },
 };
-
-Handlebars.registerPartial('list', JST.list);
 
 Handlebars.registerHelper('if_equal', function(a, b, opts) {
   if (a === b) {

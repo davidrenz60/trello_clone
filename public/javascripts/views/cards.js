@@ -3,12 +3,8 @@ var CardsView = Backbone.View.extend({
   tagName: 'ul',
   className: 'cards',
 
-  events: {
-    'click li': 'openCardDetailView',
-  },
-
   setList: function() {
-    this.$list = App.$el.find("[list-id='" + this.listId + "']").find('.top');
+    this.$list = App.$el.find("[list-id='" + this.collection.listId + "']").find('.top');
   },
 
   cardMoved: function(e, ui) {
@@ -37,14 +33,6 @@ var CardsView = Backbone.View.extend({
     }
   },
 
-  openCardDetailView: function(e) {
-    e.preventDefault();
-    var $el = $(e.currentTarget);
-    var listId = +$el.closest('ul').attr('list-id');
-    var position = +$el.attr('position-id');
-    router.navigate('/list/' + listId + '/card/' + position, { trigger: true });
-  },
-
   bindEvents: function() {
     this.$el.sortable({
       connectWith: '.cards',
@@ -55,18 +43,19 @@ var CardsView = Backbone.View.extend({
   },
 
   render: function() {
-    var context = JSON.parse(JSON.stringify(this.collection));
-
-    this.collection.view = this;
     this.$list.parent().find('ul').remove();
     this.$el.attr('list-id', this.collection.listId);
-    this.$el.html(this.template({ cards: context }));
+
+    this.$el.html(this.template({
+      cards: JSON.parse(JSON.stringify(this.collection)),
+      listId: this.collection.listId,
+    }));
+
     this.$el.insertAfter(this.$list);
     this.bindEvents();
   },
 
-  initialize: function(options) {
-    this.listId = options.listId;
+  initialize: function() {
     this.setList();
     this.render();
   },

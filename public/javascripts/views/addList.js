@@ -9,12 +9,12 @@ var AddListView = Backbone.View.extend({
     'click a.cancel': 'hideAddListForm',
   },
 
-   openAddListForm: function() {
+  openAddListForm: function() {
     this.$('.add-list-form').slideDown(this.duration);
     this.$("input[type='text']").focus();
   },
 
-   hideAddListForm: function() {
+  hideAddListForm: function() {
     this.$('.add-list-form').slideUp(this.duration);
   },
 
@@ -24,17 +24,19 @@ var AddListView = Backbone.View.extend({
     var title = $form.find("input[type='text']").val();
     var model = new List({ title: title });
 
+    model.save(null, {
+      success: function(res) {
+        var list = new List(res.attributes); // wait for id so card collection listId property can be set
+        App.lists.add(list);
+        new ListView({ model: list });
+      }
+    });
+
     if (!title) {
       this.hideAddListForm();
       return;
     }
 
-    model.save(null, {
-      success: function() {
-        App.lists.add(model);
-        new ListView({ model: model });
-      }
-    });
 
     $form.get(0).reset();
     this.$('.add-list-form').hide();

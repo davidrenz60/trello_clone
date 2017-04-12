@@ -1,4 +1,4 @@
-var CardDetailView = Backbone.View.extend({
+var CardView = Backbone.View.extend({
   template: App.templates.cardDetail,
   el: '#card-detail',
   $modalLayer: $('#modal-layer'),
@@ -45,10 +45,7 @@ var CardDetailView = Backbone.View.extend({
     this.model.get('activities').add(comment);
     this.model.set('commentCount', (this.model.get('commentCount') + 1));
 
-    if (this.model.get('subscribed')) {
-      App.notifications.add(comment);
-    }
-
+    App.trigger('activity', this.model, comment);
     this.syncCards();
     this.render();
   },
@@ -137,10 +134,7 @@ var CardDetailView = Backbone.View.extend({
     this.model.set('dueDate', date);
     this.model.get('activities').add(dateActivity);
 
-    if (this.model.get('subscribed')) {
-      App.notifications.add(dateActivity);
-    }
-
+    App.trigger('activity', this.model, dateActivity);
     this.syncCards();
     this.render();
   },
@@ -156,9 +150,7 @@ var CardDetailView = Backbone.View.extend({
     this.model.unset('dueDate');
     this.model.get('activities').add(removeDateActivity);
 
-     if (this.model.get('subscribed')) {
-      App.notifications.add(removeDateActivity);
-    }
+   App.trigger('activity', this.model, removeDateActivity);
 
     this.syncCards();
     this.render();

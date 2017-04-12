@@ -6,8 +6,8 @@ var CopyCardView = Backbone.View.extend({
 
   events: {
     'click .fa-close': 'remove',
-    'change #select-list': 'updateList',
-    'change #select-position': 'updatePosition',
+    'change #select-list': 'updateListOptions',
+    'change #select-position': 'updatePositionOptions',
     'submit': 'copyCard',
   },
 
@@ -15,12 +15,11 @@ var CopyCardView = Backbone.View.extend({
     e.preventDefault();
     var $el = $(e.target);
     var title = $(e.target).find('textarea').val();
+    if (!title) { return; }
     var position = +$el.find('#select-position :selected').val();
     var newId = this.list.get('id');
-
-    if (!title) { return; }
-
     var newModel = this.model.clone();
+
     newModel.set('title', title);
     App.trigger('add_card', newModel, newId, position);
 
@@ -28,13 +27,13 @@ var CopyCardView = Backbone.View.extend({
     this.parentView.close();
   },
 
-  updatePosition: function(e) {
+  updatePositionOptions: function(e) {
     e.preventDefault();
     var position = $(e.target).find(':selected').val();
     this.$el.find('.position-select span.value').text(position);
   },
 
-  updateList: function(e) {
+  updateListOptions: function(e) {
     e.preventDefault();
     var newListTitle = $(e.target).val();
     var list = App.lists.findWhere({ title: newListTitle });

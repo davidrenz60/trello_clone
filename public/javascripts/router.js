@@ -1,18 +1,18 @@
 var router = new (Backbone.Router.extend({
 
   routes: {
-    'list/:listId/card/:position': 'cardDetail',
+    'list/:listId/card/:position': 'cardView',
   },
 
   index: function() {
     if (App.cardView) {
-      App.closeCardDetailView();
+      App.closeCardView();
       return;
     }
   },
 
-  cardDetail: function(listId, position) {
-    App.cardDetailView(+listId, +position);
+  cardView: function(listId, position) {
+    App.openCardView(+listId, +position);
   },
 
   initialize: function() {

@@ -55,7 +55,8 @@ var ListView = Backbone.View.extend({
   },
 
   closeEditTitleView: function(e) {
-    if (e.type === 'focusout' || e.which === 13) {
+    if (e.which === 13 || e.type === 'focusout') {
+      e.preventDefault();
       var $textarea = $(e.target);
       var text = $textarea.val();
 
@@ -64,15 +65,13 @@ var ListView = Backbone.View.extend({
         return;
       }
 
-      this.model.set('title', $textarea.val()).save();
+      var attr = { title: text};
+      App.trigger('list_update', this.model, attr);
     }
   },
 
   createCards: function() {
-    this.cardsView = new CardsView({
-      collection: this.cards,
-      listId: this.model.get('id'),
-    });
+    new CardsView({ collection: this.cards });
   },
 
   rerender: function() {
@@ -87,14 +86,11 @@ var ListView = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.model.view = this;
-    this.cards = new Cards(this.model.get('cards'), {
-      listId: this.model.get('id'),
-    });
-
+    this.cards = this.model.get('cards');
     this.render();
     this.createCards();
-    this.listenTo(this.model, 'change', this.rerender);
+    this.listenTo(this.model, 'list_change', this.rerender);
+    this.listenTo(this.model, 'destroy', this.remove);
     this.listenTo(this.cards, 'reset add card_moved card_change label_update', this.rerender);
   },
 });

@@ -4,7 +4,7 @@ var Lists = Backbone.Collection.extend({
 
   // returns card collection for list
   getCardsFor: function(id) {
-    return this.get(id).view.cards;
+    return this.get(id).get('cards');
   },
 
   // returns a card based on list id and poition
@@ -12,23 +12,15 @@ var Lists = Backbone.Collection.extend({
     return this.getCardsFor(id).findWhere({ position: position });
   },
 
-  // returns an array of current list ids on the board
-  getIds: function() {
-    return $('div.list').map(function(idx, el) {
-      return +$(el).attr('list-id');
-    });
-
-  },
-
   // return an array of all card objects on the board
   getAllCards: function() {
     var result = [];
 
-    App.lists.each(function(list) {
+    this.forEach(function(list) {
       var listId = list.get('id');
       var title = list.get('title');
 
-      list.view.cards.each(function(card) {
+      list.get('cards').forEach(function(card) {
         card = card.toJSON();
         card.listTitle = title;
         card.listId = listId;

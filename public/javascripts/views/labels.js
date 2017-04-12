@@ -33,14 +33,10 @@ var LabelsView = Backbone.View.extend({
     var title = $el.find('p').text();
     var attrs = { color: color, title: title };
     var labels = this.model.get('labels');
-    var exisitingModel = labels.findWhere(attrs);
+    var label = labels.findWhere(attrs);
     var cards = App.lists.getCardsFor(this.listId);
 
-    if (exisitingModel) {
-      labels.remove(exisitingModel);
-    } else {
-      labels.add(attrs);
-    }
+    label ? labels.remove(label) : labels.add(attrs);
 
     cards.trigger('label_update');
     cards.sync('create', cards);
@@ -61,16 +57,12 @@ var LabelsView = Backbone.View.extend({
   },
 
   removeLabelsFromLists: function(attrs) {
-    App.lists.getIds().each(function(idx, id) {
-      var cards = App.lists.getCardsFor(id);
+    App.lists.forEach(function(list) {
+      var cards = list.get('cards');
 
-      cards.each(function(card) {
+      cards.forEach(function(card) {
         var labels = card.get('labels');
-        var label = labels.findWhere(attrs);
-
-        if (label) {
-          labels.remove(label);
-        }
+        card.set('labels', new Labels(labels.reject(attrs)));
       });
 
       cards.sync('create', cards);

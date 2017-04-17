@@ -27,9 +27,7 @@ var CardsView = Backbone.View.extend({
       App.trigger('remove_card', model, removedId);
       model.get('activities').add(moveActivity);
 
-      if (model.get('subscribed')) {
-        App.notifications.add(moveActivity);
-      }
+      App.trigger('activity', model, moveActivity);
     }
   },
 

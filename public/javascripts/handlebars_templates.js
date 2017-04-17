@@ -86,9 +86,9 @@ this["JST"]["cards"] = Handlebars.template({"1":function(container,depth0,helper
     + alias1(container.lambda((depths[1] != null ? depths[1].listId : depths[1]), depth0))
     + "/card/"
     + alias1(((helper = (helper = helpers.position || (depth0 != null ? depth0.position : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"position","hash":{},"data":data}) : helper)))
-    + "\"><li class=\"card\" position-id="
+    + "\" position-id="
     + alias1(((helper = (helper = helpers.position || (depth0 != null ? depth0.position : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"position","hash":{},"data":data}) : helper)))
-    + "><div class=\"label-icons\">"
+    + "><li class=\"card\"><div class=\"label-icons\">"
     + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.labels : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div><p>"
     + alias1(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"title","hash":{},"data":data}) : helper)))

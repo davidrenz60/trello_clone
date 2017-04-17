@@ -74,7 +74,7 @@ var ListView = Backbone.View.extend({
     new CardsView({ collection: this.cards });
   },
 
-  rerender: function() {
+  renderCards: function() {
     this.$el.html(this.template(this.model.toJSON()));
     this.createCards();
   },
@@ -89,8 +89,8 @@ var ListView = Backbone.View.extend({
     this.cards = this.model.get('cards');
     this.render();
     this.createCards();
-    this.listenTo(this.model, 'list_change', this.rerender);
+    this.listenTo(this.model, 'list_change', this.renderCards);
+    this.listenTo(this.cards, 'reset add card_moved card_change label_update', this.renderCards);
     this.listenTo(this.model, 'destroy', this.remove);
-    this.listenTo(this.cards, 'reset add card_moved card_change label_update', this.rerender);
   },
 });

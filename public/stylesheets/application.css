@@ -389,6 +389,9 @@ i.fa-exclamation-circle {
 ul.cards {
   min-height: 6px;
 }
+ul.cards a {
+  display: block;
+}
 ul.cards p {
   cursor: pointer;
   position: relative;

@@ -2,6 +2,7 @@
 <i class="fa fa-close"></i>
 <hr>
 <ul>
+  {{#if notifications}}
   {{#each notifications}}
     {{#if comment}}
       <li>
@@ -24,3 +25,6 @@
       </li>
     {{/if}}
   {{/each}}
+  {{else}}
+  <p>No new notifications</p>
+  {{/if}}

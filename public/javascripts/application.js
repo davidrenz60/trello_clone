@@ -32,7 +32,7 @@ var App = {
   saveList: function(model, attr) {
     var cards = model.get('cards');
 
-    // reset cards to a collection (cards were reset to an array with save)
+    // reset cards property to a collection (cards were reset to an array with save)
      model.save(attr, {
         success: function() {
           model.set('cards', cards);
@@ -58,29 +58,29 @@ var App = {
     });
 
     removeCards.reset();
-    this.updateSortOrder(removeCards);
-    this.updateSortOrder(targetCards);
+    this.updateCardPositions(removeCards);
+    this.updateCardPositions(targetCards);
   },
 
   removeCard: function(model, removedId) {
     var cards = App.lists.getCardsFor(removedId);
     cards.remove(model);
-    this.updateSortOrder(cards);
+    this.updateCardPositions(cards);
   },
 
   addCard: function(model, targetId, newIndex) {
     var cards = App.lists.getCardsFor(targetId);
     cards.add(model, { at: newIndex });
-    this.updateSortOrder(cards);
+    this.updateCardPositions(cards);
   },
 
   reorderCards: function(cards, card, newIndex) {
     cards.remove(card);
     cards.add(card, {at: newIndex });
-    this.updateSortOrder(cards);
+    this.updateCardPositions(cards);
   },
 
-  updateSortOrder: function(cards) {
+  updateCardPositions: function(cards) {
     cards.each(function(card, index) {
       card.set('position', index);
     });
@@ -179,10 +179,6 @@ Handlebars.registerHelper('format_short_date', function(date) {
 
 Handlebars.registerHelper('format_timestamp', function(time) {
   return moment(time).fromNow();
-});
-
-Handlebars.registerHelper('count_comments', function(activities) {
-  return activities.filter({ comment: true }).length;
 });
 
 Handlebars.registerHelper('times', function(start, end, block) {

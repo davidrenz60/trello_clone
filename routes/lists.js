@@ -44,7 +44,7 @@ module.exports = function(router) {
     res.status(200).end();
   });
 
-  // add a card to a list or reset all cards for a list
+  // reset cards for a list
   router.post('/lists/:id/cards', function(req, res) {
     var lists = Board.getLists();
     var listId = +req.params.id;

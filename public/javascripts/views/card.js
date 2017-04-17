@@ -1,5 +1,5 @@
 var CardView = Backbone.View.extend({
-  template: App.templates.cardDetail,
+  template: App.templates.card,
   el: '#card-detail',
   $modalLayer: $('#modal-layer'),
 
@@ -29,7 +29,6 @@ var CardView = Backbone.View.extend({
     activities.remove(comment);
     this.model.set('commentCount', this.model.get('commentCount') - 1);
     this.syncCards();
-    this.render();
   },
 
   addComment: function(e) {
@@ -47,7 +46,6 @@ var CardView = Backbone.View.extend({
 
     App.trigger('activity', this.model, comment);
     this.syncCards();
-    this.render();
   },
 
   openCopyCardView: function(e) {
@@ -89,7 +87,6 @@ var CardView = Backbone.View.extend({
     this.model.set('description', description);
     this.syncCards();
     this.closeDescription();
-    this.render();
   },
 
   openDescription: function(e) {
@@ -136,7 +133,6 @@ var CardView = Backbone.View.extend({
 
     App.trigger('activity', this.model, dateActivity);
     this.syncCards();
-    this.render();
   },
 
   removeDueDate: function(e) {
@@ -150,17 +146,15 @@ var CardView = Backbone.View.extend({
     this.model.unset('dueDate');
     this.model.get('activities').add(removeDateActivity);
 
-   App.trigger('activity', this.model, removeDateActivity);
+    App.trigger('activity', this.model, removeDateActivity);
 
     this.syncCards();
-    this.render();
   },
 
   toggleSubscribe: function(e) {
     e.preventDefault();
     this.model.set('subscribed', !this.model.get('subscribed'));
     this.syncCards();
-    this.render();
   },
 
   syncCards: function() {
@@ -187,6 +181,7 @@ var CardView = Backbone.View.extend({
     this.listId = options.listId;
     this.cards = App.lists.getCardsFor(this.listId);
     this.listenTo(this.cards, 'label_update', this.render);
+    this.listenTo(this.model, 'card_change', this.render);
     this.render();
   }
 });

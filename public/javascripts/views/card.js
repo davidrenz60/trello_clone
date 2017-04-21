@@ -22,9 +22,10 @@ var CardView = Backbone.View.extend({
 
   deleteComment: function(e) {
     e.preventDefault();
-    var index = $(e.taget).closest('li').index();
+    var index = $(e.target).closest('li').index();
     var activities = this.model.get('activities');
     var comment = activities.at(index);
+    debugger;
 
     activities.remove(comment);
     this.model.set('commentCount', this.model.get('commentCount') - 1);

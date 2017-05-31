@@ -58,7 +58,7 @@ this["JST"]["card"] = Handlebars.template({"1":function(container,depth0,helpers
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"detail-header\"><i class=\"fa fa-close close-modal\"></i><div class=\"title-detail\"><i class=\"fa fa-envelope-open\"></i><textarea>"
+  return "<div class=\"click-layer\"></div><div class=\"detail-header\"><i class=\"fa fa-close close-modal\"></i><div class=\"title-detail\"><i class=\"fa fa-envelope-open\"></i><textarea>"
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</textarea><div class=\"detail-list-info\"><p class=\"move-list-action\">In list: "
     + alias4(((helper = (helper = helpers.list_title || (depth0 != null ? depth0.list_title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"list_title","hash":{},"data":data}) : helper)))
@@ -184,7 +184,7 @@ this["JST"]["list"] = Handlebars.template({"1":function(container,depth0,helpers
 },"useData":true});
 
 this["JST"]["listActions"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<p>List Actions<i class=\"fa fa-close\"></i></p><hr><ul><li class=\"add-card\">Add Card...</li><li class=\"copy\">Copy List...</li><li class=\"subscribe\">Subscribe</li><hr><li class=\"move-all-cards\">Move All Cards in This List</li><li class=\"archive-cards\">Archive All Cards in This List</li><hr><li class=\"archive\">Archive This List</li></ul>";
+    return "<div class=\"click-layer\"></div><p>List Actions<i class=\"fa fa-close\"></i></p><hr><ul><li class=\"add-card\">Add Card...</li><li class=\"copy\">Copy List...</li><li class=\"subscribe\">Subscribe</li><hr><li class=\"move-all-cards\">Move All Cards in This List</li><li class=\"archive-cards\">Archive All Cards in This List</li><hr><li class=\"archive\">Archive This List</li></ul>";
 },"useData":true});
 
 this["JST"]["moveAllCards"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {

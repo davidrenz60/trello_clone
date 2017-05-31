@@ -1,10 +1,11 @@
 var CardView = Backbone.View.extend({
   template: App.templates.card,
   el: '#card-detail',
-  $modalLayer: $('#modal-layer'),
+  $modal: $('#card-modal'),
 
   events: {
     'click .close-modal': 'close',
+    'click div.click-layer': 'close',
     'click a.archive': 'deleteCard',
     'blur .title-detail textarea': 'updateCardTitle',
     'submit .open-description': 'updateDescription',
@@ -115,7 +116,7 @@ var CardView = Backbone.View.extend({
     router.navigate('/', { trigger: true });
     this.$el.html();
     this.undelegateEvents();
-    this.$modalLayer.hide();
+    this.$modal.hide();
   },
 
   getDate: function(e) {
@@ -169,7 +170,7 @@ var CardView = Backbone.View.extend({
     context.list_title = App.lists.get(this.listId).get('title');
 
     this.$el.html(this.template(context));
-    this.$modalLayer.show();
+    this.$modal.show();
     $('#datepicker').datepicker({
       showOn: 'button',
       buttonText: 'Due Date',

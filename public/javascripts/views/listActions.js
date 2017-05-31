@@ -4,6 +4,7 @@ var ListActionsView = Backbone.View.extend({
 
   events: {
     'click i.fa-close': 'remove',
+    'click div.click-layer': 'remove',
     'click li.archive': 'destroyList',
     'click li.copy': 'copyList',
     'click li.subscribe': 'toggleSubscribe',

@@ -454,7 +454,7 @@ ul.cards .sortable-placeholder-card {
   display: inline-block;
   margin: 2px 5px;
 }
-#modal-layer {
+#card-modal {
   display: none;
   position: fixed;
   width: 100%;
@@ -1187,4 +1187,12 @@ p {
 }
 .grey {
   background: #808080;
+}
+.click-layer {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
 }

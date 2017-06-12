@@ -10,20 +10,20 @@
   <div class="select-div list-select">
     <span class="label">List</span>
     <span class="value">{{listTitle}}</span>
-    <select id="select-list">
-      <option>{{listTitle}}</option>
+    <select id="select-list" name="listId">
+      <option value="{{id}}">{{listTitle}}</option>
       {{#each lists}}
-      <option>{{title}}</option>
+      <option value="{{id}}">{{title}}</option>
       {{/each}}
     </select>
   </div>
   <div class="select-div position-select">
     <span class="label">Position</span>
-    <span class="value">{{position}}</span>
-    <select id="select-position">
-      <option>{{position}}</options>
-    {{#times 0 max}}
-      <option>{{this}}</option>
+    <span class="value">0</span>
+    <select id="select-position" name="position">
+      <option value="{{position}}">{{position}}</options>
+    {{#times 0 positions}}
+      <option value="{{this}}">{{this}}</option>
     {{/times}}
     </select>
   </div>

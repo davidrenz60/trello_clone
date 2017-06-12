@@ -1,10 +1,10 @@
 <div class="click-layer"></div>
 <div class="detail-header"><i class="fa fa-close close-modal"></i>
   <div class="title-detail"><i class="fa fa-envelope-open"></i>
-    <textarea>{{title}}</textarea>
+    <textarea>{{card.title}}</textarea>
     <div class="detail-list-info">
       <p class="move-list-action">In list: {{list_title}}</p>
-      {{#if_equal subscribed true}}
+      {{#if_equal card.subscribed true}}
       <i class="fa fa-eye"></i>
       {{/if_equal}}
     </div>
@@ -13,10 +13,10 @@
       <div class="card-label-box {{color}}"></div>
       {{/each}}
     </div>
-    {{#if dueDate}}
+    {{#if card.dueDate}}
     <div class="due-date">
       <i class="fa fa-calendar"></i>
-      <p>{{format_date dueDate}}</p>
+      <p>{{format_date card.dueDate}}</p>
       <a class="remove-date">Remove</a>
     </div>
     {{/if}}
@@ -26,9 +26,9 @@
   <div class="label-due"></div>
   <div class="description">
     <h4>description</h4><a class="edit-description" href="#">edit</a>
-    <p>{{description}}</p>
+    <p>{{card.description}}</p>
     <form class="open-description">
-      <textarea>{{description}}</textarea>
+      <textarea>{{card.description}}</textarea>
       <div>
         <input type="submit" value="Save"/><i class="fa fa-close description-close"></i>
       </div>
@@ -45,33 +45,33 @@
     <h3>Activity<i class="fa fa-newspaper-o"></i></h3>
     <ul class="activities">
       {{#each activities}}
-        {{#if comment}}
+        {{#if type}}
+          {{#if_equal type 'setDueDate'}}
+            <li class="activity">
+              <p class="action-desc">The Due Date was set to {{format_date date}}</p>
+              <p class="timestamp">{{format_timestamp timestamp}}</p>
+            </li>
+          {{/if_equal}}
+          {{#if_equal type 'removeDueDate'}}
+            <li class="activity removeDueDate">
+              <p class="action-desc">The due date was removed</p>
+              <p class="timestamp">{{format_timestamp timestamp}}</p>
+            </li>
+          {{/if_equal}}
+          {{#if_equal type 'cardMove'}}
+            <li class="activity cardMove">
+              <p class="action-desc">this card was moved from <span>{{from}}</span> to <span>{{to}}</span></p>
+              <p class="timestamp">{{format_timestamp timestamp}}</p>
+            </li>
+          {{/if_equal}}
+        {{else}}
         <li class="activity comment">
           <p class="comment-desc">{{text}}</p>
           <p class="timestamp">{{format_timestamp timestamp}}</p>
-          <a href="#" class="delete-comment">Delete</a>
+          <a href="#" class="delete-comment" data-id="{{id}}">Delete</a>
         </li>
         {{/if}}
-        {{#if setDueDate}}
-        <li class="activity setDueDate">
-          <p class="action-desc">The due date was set to {{format_date date}}</p>
-          <p class="timestamp">{{format_timestamp timestamp}}</p>
-        </li>
-        {{/if}}
-        {{#if removeDueDate}}
-        <li class="activity removeDueDate">
-          <p class="action-desc">The due date was removed</p>
-          <p class="timestamp">{{format_timestamp timestamp}}</p>
-        </li>
-        {{/if}}
-        {{#if cardMove}}
-        <li class="activity cardMove">
-          <p class="action-desc">this card was moved from <span>{{from}}</span> to <span>{{to}}</span></p>
-          <p class="timestamp">{{format_timestamp timestamp}}</p>
-        </li>
-        {{/if}}
-      {{/each}}
-      </li>
+      {{/each }}
     </ul>
   </div>
 </div>

@@ -16,45 +16,38 @@ var CardView = Backbone.View.extend({
     'click a.remove-date': 'removeDueDate',
     'click a.subscribe': 'toggleSubscribe',
     'click a.copy': 'openCopyCardView',
-    'click .move-list-action': 'openMoveListView',
+    'click .move-list-action': 'openMoveCardView',
     'submit .add-comment': 'addComment',
     'click a.delete-comment': 'deleteComment',
   },
 
   deleteComment: function(e) {
     e.preventDefault();
-    var index = $(e.target).closest('li').index();
-    var activities = this.model.get('activities');
-    var comment = activities.at(index);
+    var id = $(e.target).data('id');
+    var comment = App.comments.get(id);
 
-    activities.remove(comment);
-    this.model.set('commentCount', this.model.get('commentCount') - 1);
-    this.syncCards();
+    comment.destroy();
   },
 
   addComment: function(e) {
     e.preventDefault();
     var text = $(e.target).find('textarea').val();
-    var comment = new Activity({
+    var comment = {
       text: text,
-      comment: true,
+      cardId: this.model.get('id'),
       title: this.model.get('title'),
-      href: Backbone.history.fragment,
-    });
+    };
 
-    this.model.get('activities').add(comment);
-    this.model.set('commentCount', (this.model.get('commentCount') + 1));
-
+    App.comments.create(comment);
     App.trigger('activity', this.model, comment);
-    this.syncCards();
   },
 
   openCopyCardView: function(e) {
     e.preventDefault();
-    var list = App.lists.get(this.listId);
+    var collection = App.lists.get(this.model.get('listId'));
+
     new CopyCardView({
-      originalList: list,
-      list: list,
+      collection: collection,
       model: this.model,
       parentView: this,
     });
@@ -65,18 +58,17 @@ var CardView = Backbone.View.extend({
     new LabelsView({
       model: this.model,
       target: $(e.target),
-      listId: this.listId,
     });
   },
 
-  openMoveListView: function(e) {
+  openMoveCardView: function(e) {
     e.preventDefault();
-    var list = App.lists.get(this.listId);
+    var collection = App.lists.get(this.model.get('listId'));
+
     new MoveCardView({
-      originalList: list,
-      list: list,
-      target: $(e.target),
+      collection: collection,
       model: this.model,
+      target: $(e.target),
       parentView: this,
     });
   },
@@ -85,8 +77,7 @@ var CardView = Backbone.View.extend({
     e.preventDefault();
     var description = $(e.target).find('textarea').val();
 
-    this.model.set('description', description);
-    this.syncCards();
+    this.model.save('description', description);
     this.closeDescription();
   },
 
@@ -101,76 +92,72 @@ var CardView = Backbone.View.extend({
 
   updateCardTitle: function(e) {
     var title = $(e.target).val();
-
-    this.model.set('title', title);
-    this.syncCards();
+    this.model.save('title', title);
   },
 
   deleteCard: function(e) {
     e.preventDefault();
-    App.trigger('remove_card', this.model, this.listId);
+    this.model.destroy();
     this.close();
   },
 
   close: function() {
-    router.navigate('/', { trigger: true });
-    this.$el.html();
-    this.undelegateEvents();
+    this.stopListening();
+    this.$el.empty();
     this.$modal.hide();
+    router.navigate('/', { trigger: true });
   },
 
   getDate: function(e) {
     if (!e) { return; }
     var date = new Date(e);
-    var dateActivity = {
-      setDueDate: true,
+    var activity = {
+      type: 'setDueDate',
       date: date,
-      href: Backbone.history.fragment,
+      cardId: this.model.get('id'),
       title: this.model.get('title'),
     };
 
-    this.model.set('dueDate', date);
-    this.model.get('activities').add(dateActivity);
-
-    App.trigger('activity', this.model, dateActivity);
-    this.syncCards();
+    App.activities.create(activity);
+    this.model.save({ dueDate: date }, { wait: true });
+    App.trigger('activity', this.model, activity);
   },
 
   removeDueDate: function(e) {
     e.preventDefault();
-    var removeDateActivity = {
-      removeDueDate: true,
-      href: Backbone.history.fragment,
+    var activity = {
+      type: 'removeDueDate',
+      cardId: this.model.get('id'),
       title: this.model.get('title'),
     };
 
-    this.model.unset('dueDate');
-    this.model.get('activities').add(removeDateActivity);
-
-    App.trigger('activity', this.model, removeDateActivity);
-
-    this.syncCards();
+    App.activities.create(activity);
+    this.model.save({ dueDate: '' });
+    App.trigger('activity', this.model, activity);
   },
 
   toggleSubscribe: function(e) {
     e.preventDefault();
-    this.model.set('subscribed', !this.model.get('subscribed'));
-    this.syncCards();
-  },
-
-  syncCards: function() {
-    this.model.trigger('card_change');
-    this.cards.sync('create', this.cards);
+    this.model.save('subscribed', !this.model.get('subscribed'));
   },
 
   render: function() {
-    var context = this.model.toJSON();
-    context.activities = this.model.get('activities').toJSON();
-    context.labels = this.model.get('labels').toJSON();
-    context.list_title = App.lists.get(this.listId).get('title');
+    var labels = this.model.get('labels').map(function(id) {
+      return App.labels.get(id).toJSON();
+    });
 
-    this.$el.html(this.template(context));
+    var comments = _(App.comments.toJSON()).where({ cardId: this.model.get('id') });
+    var activities = _(App.activities.toJSON()).where({ cardId: this.model.get('id') });
+
+    this.$el.html(this.template({
+      card: this.model.toJSON(),
+      listTitle: App.lists.get(this.model.get('listId')).get('title'),
+      activities: _(comments.concat(activities)).sortBy('timestamp'),
+      labels: labels,
+    }));
+
     this.$modal.show();
+
     $('#datepicker').datepicker({
       showOn: 'button',
       buttonText: 'Due Date',
@@ -178,11 +165,9 @@ var CardView = Backbone.View.extend({
     });
   },
 
-  initialize: function(options) {
-    this.listId = options.listId;
-    this.cards = App.lists.getCardsFor(this.listId);
-    this.listenTo(this.cards, 'label_update', this.render);
-    this.listenTo(this.model, 'card_change', this.render);
+  initialize: function() {
+    this.listenTo(this.model, 'change label_update', this.render);
+    this.listenTo(App.comments, 'add remove', this.render);
     this.render();
   }
 });

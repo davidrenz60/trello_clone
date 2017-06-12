@@ -1,0 +1,23 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "text": "this is a comment",
+      "timestamp": 1491525777549,
+      "cardId": 1
+    },
+    {
+      "id": 2,
+      "text": "this is another comment",
+      "timestamp": 1491525817302,
+      "cardId": 1
+    },
+    {
+      "id": 3,
+      "text": "third comment",
+      "timestamp": 1491525817302,
+      "cardId": 3
+    }
+  ],
+  "lastId": 6
+}

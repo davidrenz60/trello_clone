@@ -14,14 +14,33 @@ var CopyCardView = Backbone.View.extend({
   copyCard: function(e) {
     e.preventDefault();
     var $el = $(e.target);
-    var title = $(e.target).find('textarea').val();
-    if (!title) { return; }
-    var position = +$el.find('#select-position :selected').val();
-    var newId = this.list.get('id');
-    var newModel = this.model.clone();
+    var attrs = $el.serializeArray();
+    var title = $el.find('textarea').val();
+    this.listId = +attrs[0].value;
+    var position = +attrs[1].value;
+    var model = this.model.clone();
 
-    newModel.set('title', title);
-    App.trigger('add_card', newModel, newId, position);
+    model.unset('id').set({
+      title: title,
+      position: position
+    });
+
+    App.cards.create(model, {
+      success: function(res) {
+        var cardIds = App.cards.where({ listId: this.listId }).map(function(card){
+          return card.id;
+        });
+
+        res.set('listId', this.listId);
+        cardIds.splice(res.get('position'), 0, res.id);
+        cardIds.forEach(function(cardId, idx) {
+          App.cards.get(cardId).save('position', idx);
+        });
+
+        App.cards.trigger('card_move');
+      },
+        context: this,
+    });
 
     this.remove();
     this.parentView.close();
@@ -35,12 +54,11 @@ var CopyCardView = Backbone.View.extend({
 
   updateListOptions: function(e) {
     e.preventDefault();
-    var newListTitle = $(e.target).val();
-    var list = App.lists.findWhere({ title: newListTitle });
+    var id = +$(e.target).find(':selected').attr('value');
+    var collection = App.lists.get(id);
 
     new CopyCardView({
-      list: list,
-      originalList: this.originalList,
+      collection: collection,
       model: this.model,
       parentView: this.parentView,
     });
@@ -48,11 +66,10 @@ var CopyCardView = Backbone.View.extend({
 
   render: function() {
     var context = this.model.toJSON();
-    context.max = this.list.get('cards').length;
-    context.listTitle = this.list.get('title');
-    context.lists = App.lists.pluck('title').map(function(title) {
-     return { title: title };
-    });
+    context.positions = App.cards.where({ listId: this.collection.get('id') }).length;
+    context.listTitle = this.collection.get('title');
+    context.id = this.collection.get('id');
+    context.lists = App.lists.toJSON();
 
     $('#copy-card').remove();
     this.$el.html(this.template(context));
@@ -60,8 +77,6 @@ var CopyCardView = Backbone.View.extend({
   },
 
   initialize: function(options) {
-    this.list = options.list;
-    this.originalList = options.originalList;
     this.parentView = options.parentView;
     this.render();
   }

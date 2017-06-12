@@ -4,9 +4,9 @@
   <hr>
   <input type="text" id="label-search" placeholder="Search Labels...">
   <ul>
-    {{#each AllLabels}}
+    {{#each labels}}
     <li>
-      <div class="label-bar {{color}}" data-color="{{color}}">
+      <div class="label-bar {{color}}" data-id="{{id}}">
         <p>{{title}}</p>
         {{#if selected}}
         <i class="fa fa-check"></i>

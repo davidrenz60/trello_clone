@@ -16,19 +16,25 @@ var ListView = Backbone.View.extend({
   newCard: function(e) {
     e.preventDefault();
     var title = $(e.target).find('textarea').val();
+    var listId = +this.$el.attr('list-id');
+    var card;
 
     if (!title) {
       this.closeAddCardView();
       return;
     }
 
-    var card = new Card({
+    card = App.cards.create({
       title: title,
+      listId: listId,
       position: this.cards.length,
+    }, {
+      context: this,
+      success: function(card) {
+        this.cards.add(card);
+      }
     });
 
-    this.cards.add(card);
-    this.cards.sync('create', this.cards);
     this.closeAddCardView();
   },
 
@@ -45,7 +51,7 @@ var ListView = Backbone.View.extend({
     e.preventDefault();
     new ListActionsView({
       model: this.model,
-      cards: this.cards,
+      collection: this.cards,
       $container: this.$el
     });
   },
@@ -65,16 +71,17 @@ var ListView = Backbone.View.extend({
         return;
       }
 
-      var attr = { title: text};
-      App.trigger('list_update', this.model, attr);
+      this.model.save({ title: text });
     }
   },
 
   createCards: function() {
+    this.cards = new Cards(App.cards.where({ listId: this.model.get('id') }));
+    this.cards.listId = this.model.get('id');
     new CardsView({ collection: this.cards });
   },
 
-  renderCards: function() {
+  rerender: function() {
     this.$el.html(this.template(this.model.toJSON()));
     this.createCards();
   },
@@ -83,14 +90,17 @@ var ListView = Backbone.View.extend({
     this.$el.attr('list-id', this.model.get('id'));
     this.$el.html(this.template(this.model.toJSON()));
     this.$el.appendTo(App.$lists);
+    this.createCards();
   },
 
   initialize: function() {
-    this.cards = this.model.get('cards');
     this.render();
-    this.createCards();
-    this.listenTo(this.model, 'list_change', this.renderCards);
-    this.listenTo(this.cards, 'reset add card_moved card_change label_update', this.renderCards);
+    this.listenTo(this.model, 'change', this.rerender);
     this.listenTo(this.model, 'destroy', this.remove);
+    this.listenTo(this.cards, 'change:dueDate change:subscribed label_update', this.rerender);
+    this.listenTo(App.cards, 'card_move', this.rerender);
+    this.listenTo(App.comments, 'add remove', this.rerender);
+    this.listenTo(App.activites, 'add', this.rerender);
+    this.listenTo(App.labels, 'add remove', this.rerender);
   },
 });

@@ -3,7 +3,6 @@ var App = {
   $lists: $('#lists'),
   $header: $('header'),
   $search: $('#header-search input'),
-  $modalLayer: $('#modal-layer'),
   templates: JST,
 
   init: function() {
@@ -19,74 +18,28 @@ var App = {
     new AddListView();
   },
 
-  openCardView: function(listId, position) {
-    var card = this.lists.getCard(listId, position);
-    this.cardView = new CardView({ model: card, listId: listId });
+  openCardView: function(id) {
+    this.cardView = new CardView({ model: App.cards.get(id) });
   },
 
   closeCardView: function() {
-    this.$modalLayer.hide();
     this.cardView.close();
-  },
-
-  saveList: function(model, attr) {
-    var cards = model.get('cards');
-
-    // reset cards property to a collection (cards were reset to an array with save)
-     model.save(attr, {
-        success: function() {
-          model.set('cards', cards);
-          model.trigger('list_change');
-        }
-      });
   },
 
   updateListPositions: function(e, ui) {
     var id = +ui.item.attr('list-id');
     var index = ui.item.index();
     var model = this.lists.remove(id);
+
     this.lists.add(model, { at: index });
     this.lists.sync('create', this.lists);
   },
 
-  moveAllCards: function(removedId, targetId) {
-    var removeCards = this.lists.getCardsFor(removedId);
-    var targetCards = this.lists.getCardsFor(targetId);
-
-    removeCards.each(function(card) {
-      targetCards.add(card);
+  updateCardPositions: function(elements) {
+    elements.each(function(idx, el) {
+      var id = $(el).data('id');
+      App.cards.get(id).save('position', idx);
     });
-
-    removeCards.reset();
-    this.updateCardPositions(removeCards);
-    this.updateCardPositions(targetCards);
-  },
-
-  removeCard: function(model, removedId) {
-    var cards = App.lists.getCardsFor(removedId);
-    cards.remove(model);
-    this.updateCardPositions(cards);
-  },
-
-  addCard: function(model, targetId, newIndex) {
-    var cards = App.lists.getCardsFor(targetId);
-    cards.add(model, { at: newIndex });
-    this.updateCardPositions(cards);
-  },
-
-  reorderCards: function(cards, card, newIndex) {
-    cards.remove(card);
-    cards.add(card, {at: newIndex });
-    this.updateCardPositions(cards);
-  },
-
-  updateCardPositions: function(cards) {
-    cards.each(function(card, index) {
-      card.set('position', index);
-    });
-
-    cards.sync('create', cards);
-    cards.trigger('card_moved');
   },
 
   openSearchView: function(e) {
@@ -106,8 +59,9 @@ var App = {
   searchAllCards: function(e) {
     var text = $(e.target).val();
     var regex = new RegExp(text, 'i');
-    var results = App.lists.getAllCards().filter(function(card) {
+    var results = _(App.cards.toJSON()).filter(function(card) {
       if (card.title.search(regex) >= 0) {
+        card.listTitle = App.lists.get(card.id).get('title');
         return card;
       }
     });
@@ -126,6 +80,7 @@ var App = {
 
   addNotification: function(model, activity) {
     if (model.get('subscribed')) {
+      activity.type = activity.type || 'comment';
       this.notifications.add(activity);
     }
   },
@@ -139,11 +94,6 @@ var App = {
       stop: this.updateListPositions.bind(this),
     });
 
-    this.on('list_update', this.saveList);
-    this.on('move_all_cards', this.moveAllCards);
-    this.on('remove_card', this.removeCard);
-    this.on('add_card', this.addCard);
-    this.on('cards_reordered', this.reorderCards);
     this.on('activity', this.addNotification);
     this.listenTo(this.notifications, 'add', this.alertNotification);
     this.$search.on('focus', this.openSearchView);

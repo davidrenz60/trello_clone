@@ -1,1 +1,5 @@
-var Notification = Backbone.Model.extend({});
+var Notification = Backbone.Model.extend({
+  defaults: {
+    type: 'comment'
+  }
+});

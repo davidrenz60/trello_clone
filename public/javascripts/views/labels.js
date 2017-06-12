@@ -16,57 +16,43 @@ var LabelsView = Backbone.View.extend({
 
   searchLabels: function(e) {
     e.preventDefault();
-    var text = $(e.target).val();
-    var regex = new RegExp(text, 'i');
-    var context = _(App.labels.toJSON()).filter(function(label) {
-      if (label.title.search(regex) >= 0) {
-        return label;
-      }
-    });
-
-    this.render(context, text);
+    var queryText = $(e.target).val();
+    this.render(queryText);
   },
 
   toggleLabelStatus: function(e) {
     var $el = $(e.currentTarget);
-    var color = $el.attr('data-color');
-    var title = $el.find('p').text();
-    var attrs = { color: color, title: title };
-    var labels = this.model.get('labels');
-    var label = labels.findWhere(attrs);
-    var cards = App.lists.getCardsFor(this.listId);
+    var id = $el.data('id');
+    var labelIds = this.model.get('labels');
+    var added = labelIds.indexOf(id) === -1;
 
-    label ? labels.remove(label) : labels.add(attrs);
+    if (added) {
+      labelIds.push(id);
+    } else {
+      labelIds = _(labelIds).reject(function(labelId) {
+        return labelId === id;
+      });
+    }
 
-    cards.trigger('label_update');
-    cards.sync('create', cards);
+    this.model.save({ labels: labelIds });
+    this.model.trigger('label_update');
   },
 
   deleteLabel: function(e) {
-    var $el = $(e.target);
-    var color = $el.prev().attr('data-color');
-    var title = $(e.target).prev().find('p').text();
-    var attrs = { color: color, title: title };
-    var model = App.labels.findWhere(attrs);
-
-    App.labels.remove(model);
-    App.labels.sync('create', App.labels);
-
-    this.removeLabelsFromLists(attrs);
-    this.render();
+    var id = $(e.target).prev().data("id");
+    var label = App.labels.get(id);
+    this.removeLabelsFromCards(id);
+    label.destroy();
   },
 
-  removeLabelsFromLists: function(attrs) {
-    App.lists.forEach(function(list) {
-      var cards = list.get('cards');
-
-      cards.forEach(function(card) {
-        var labels = card.get('labels');
-        card.set('labels', new Labels(labels.reject(attrs)));
+  removeLabelsFromCards: function(id) {
+    App.cards.each(function(card) {
+      var labelIds = card.get('labels');
+      labelIds = _(labelIds).reject(function(labelId) {
+        return labelId === id;
       });
 
-      cards.sync('create', cards);
-      cards.trigger('label_update');
+      card.save({ labels: labelIds });
     });
   },
 
@@ -95,48 +81,49 @@ var LabelsView = Backbone.View.extend({
     var $el = $(e.target);
     var title = $el.find("input[type='text']").val();
     var color = $el.find(':checked').val();
+    var label = { title: title, color: color };
 
-    App.labels.add({
-      title: title,
-      color: color
-    });
-
-    App.labels.sync('create', App.labels);
-    this.render();
+    App.labels.create(label, { wait: true });
   },
 
-  render: function(context, queryText) {
-    if (!context) {
-      context = App.labels.toJSON();
-    }
-
-    this.model.get('labels').forEach(function(label) {
-      var existingLabel = _.findWhere(context, label.toJSON());
-      if (existingLabel) {
-        existingLabel.selected = true;
+  render: function(queryText) {
+    var regex;
+    var ids = this.model.get('labels');
+    var labels = App.labels.toJSON().map(function(label) {
+      if (ids.indexOf(label.id) >= 0) {
+        label.selected = true;
       }
 
+      return label;
     });
+
+    if (queryText) {
+      regex = new RegExp(queryText, 'i');
+
+      labels = _(labels).filter(function(label) {
+        if (label.title.search(regex) >= 0) {
+          return label;
+        }
+      });
+    }
 
     $('#labels').remove();
     this.delegateEvents();
-    this.$el.html(this.template({ AllLabels: context }));
+    this.$el.html(this.template({ labels: labels }));
     this.$el.prependTo('#card-detail');
     this.setPosition();
+
+    $("#label-search").val(queryText).focus();
 
     $("input[type='radio']").checkboxradio({
       icon: false
     });
-
-    if (queryText) {
-      $("#label-search").val(queryText).focus();
-    }
   },
 
   initialize: function(options) {
-    this.listId = options.listId;
     this.target = options.target;
-    this.$container = options.$container;
     this.render();
+    this.listenTo(App.labels, 'add remove', this.render.bind(this, ''));
+    this.listenTo(this.model, 'change label_update', this.render.bind(this, ''));
   }
 });

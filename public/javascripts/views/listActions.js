@@ -14,13 +14,17 @@ var ListActionsView = Backbone.View.extend({
   },
 
   deleteAllCards: function() {
-    this.cards.reset();
-    this.cards.sync('create', this.cards);
+    this.collection.pluck('id').forEach(function(id) {
+      App.cards.get(id).destroy();
+    });
+
+    this.remove();
   },
 
   openMoveCardsView: function() {
     new MoveAllCardsView({
       model: this.model,
+      collection: this.collection,
       $container: this.$container
     });
 
@@ -33,7 +37,7 @@ var ListActionsView = Backbone.View.extend({
   },
 
   toggleSubscribe: function() {
-    App.trigger('list_update', this.model, { subscribed: !this.model.get('subscribed') });
+    this.model.save({ subscribed: !this.model.get('subscribed') });
     this.remove();
   },
 
@@ -43,14 +47,21 @@ var ListActionsView = Backbone.View.extend({
   },
 
   copyList: function() {
-    var clone = this.model.clone();
-    clone.unset("id");
+    var listId = this.model.get('id');
+    var newList = this.model.clone();
+    newList.unset('id');
 
-    clone.save(null, {
+    App.lists.create(newList, {
       success: function(res) {
-        var list = new List(res.attributes); // wait for id so card collection listId property can be set
-        App.lists.add(list);
-        new ListView({ model: list });
+        $.ajax({
+        url: '/cards/copy',
+        method: 'post',
+        data: { listId: listId, newId: res.id },
+        success: function(cards) {
+          App.cards.add(cards);
+          new ListView({ model: App.lists.get(cards[0].listId) });
+        }
+       });
       }
     });
 
@@ -63,7 +74,6 @@ var ListActionsView = Backbone.View.extend({
   },
 
   initialize: function(options) {
-    this.cards = options.cards;
     this.$container = options.$container;
     this.render();
   },

@@ -15,7 +15,7 @@
 
 ### Methods
 
-* Express backend with RESTful API
+* Express backend with RESTful API for cards, lists, comments, notifications, and labels
 * Backbone 
 * JQuery-UI used for drag and drop features and datepicker
 * Handlebars templates

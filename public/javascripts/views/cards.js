@@ -8,27 +8,41 @@ var CardsView = Backbone.View.extend({
   },
 
   cardMoved: function(e, ui) {
-    var removedId = +$(e.target).attr('list-id');
+    var $el = $(e.target);
     var targetId = +$(e.toElement).closest('.list').attr('list-id');
-    var model = this.collection.findWhere({ position: +ui.item.attr('position-id') });
-    var newIndex = ui.item.index();
-    var moveActivity = {
-          title: model.get('title'),
-          cardMove: true,
-          from: App.lists.get(removedId).get('title'),
-          to: App.lists.get(targetId).get('title'),
-          href: '/list/' + targetId + '/card/' + newIndex,
-        };
+    var model = this.collection.get(+ui.item.attr('data-id'));
+    var fromId = model.get('listId');
+    var activity;
 
-    if (targetId === removedId) {
-      App.trigger('cards_reordered', this.collection, model, newIndex);
-    } else {
-      App.trigger('add_card', model, targetId, newIndex);
-      App.trigger('remove_card', model, removedId);
-      model.get('activities').add(moveActivity);
+    model.set('listId', targetId);
+    App.updateCardPositions($el.find('a'));
+    App.updateCardPositions(ui.item.parent().find('a'));
+    App.cards.trigger('card_move');
 
-      App.trigger('activity', model, moveActivity);
+    if (targetId !== fromId) {
+      activity = {
+        type: 'cardMove',
+        to: App.lists.get(targetId).get('title'),
+        from: App.lists.get(fromId).get('title'),
+        cardId: model.get('id'),
+        title: model.get('title'),
+      };
+
+      App.activities.create(activity);
+      App.trigger('activity', model, activity);
     }
+  },
+
+  setCardsContext: function() {
+    return this.collection.map(function(card) {
+      card = card.toJSON();
+      card.labels = card.labels.map(function(id) {
+        return App.labels.get(id).toJSON();
+      });
+
+      card.commentCount = App.comments.where({ cardId: card.id }).length;
+      return card;
+    });
   },
 
   bindEvents: function() {
@@ -45,7 +59,7 @@ var CardsView = Backbone.View.extend({
     this.$el.attr('list-id', this.collection.listId);
 
     this.$el.html(this.template({
-      cards: JSON.parse(JSON.stringify(this.collection)),
+      cards: this.setCardsContext(),
       listId: this.collection.listId,
     }));
 

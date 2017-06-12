@@ -4,26 +4,26 @@
 <ul>
   {{#if notifications}}
   {{#each notifications}}
-    {{#if comment}}
+    {{#if_equal type 'comment'}}
       <li>
-        <a href="/{{href}}"><span>{{title}}</span> was commented on</a>
+        <a href="/card/{{cardId}}"><span>{{title}}</span> was commented on</a>
       </li>
-    {{/if}}
-    {{#if setDueDate}}
+    {{/if_equal}}
+    {{#if_equal type 'setDueDate'}}
       <li>
-        <a href="/{{href}}">A due date of {{format_date date}} was set for <span>{{title}}</span></a>
+        <a href="/card/{{cardId}}">A due date of {{format_date date}} was set for <span>{{title}}</span></a>
       </li>
-    {{/if}}
-    {{#if removeDueDate}}
+    {{/if_equal}}
+    {{#if_equal type 'removeDueDate'}}
       <li>
-        <a href="{{href}}">The due date for <span>{{title}}</span> was removed</a>
+        <a href="/card/{{cardId}}">The due date for <span>{{title}}</span> was removed</a>
       </li>
-    {{/if}}
-    {{#if cardMove}}
+    {{/if_equal}}
+    {{#if_equal type 'cardMove'}}
       <li>
-        <a href="{{href}}"><span>{{title}}</span> was moved from <span>{{from}}</span> to <span>{{to}}</span></a>
+        <a href="/card/{{cardId}}"><span>{{title}}</span> was moved from <span>{{from}}</span> to <span>{{to}}</span></a>
       </li>
-    {{/if}}
+    {{/if_equal}}
   {{/each}}
   {{else}}
   <p>No new notifications</p>

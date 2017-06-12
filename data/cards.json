@@ -1,0 +1,31 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "title": "card one in list one",
+      "subscribed": false,
+      "description": "A description for this card",
+      "labels": [],
+      "listId": 1,
+      "position": 0
+    },
+    {
+      "id": 2,
+      "title": "card two in list one",
+      "subscribed": true,
+      "labels": [2, 3],
+      "listId": 1,
+      "position": 1,
+      "dueDate": "2017-06-22T07:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "card three in list three",
+      "subscribed": false,
+      "labels": [],
+      "listId": 3,
+      "position": 0
+    }
+  ],
+  "lastId": 6
+}

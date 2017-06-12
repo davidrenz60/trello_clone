@@ -13,28 +13,34 @@ var MoveCardView = Backbone.View.extend({
 
   moveCard: function(e) {
     e.preventDefault();
-    var $el = $(e.target);
-    var listTitle = $el.find('#select-list :selected').val();
-    var position = +$el.find('#select-position :selected').val();
-    var removedId = this.originalList.get('id');
-    var newId = this.list.get('id');
-    var moveActivity = {
-          title: this.model.get('title'),
-          cardMove: true,
-          from: this.originalList.get('title'),
-          to: listTitle,
-          href: Backbone.history.fragment,
-        };
+    var attrs = $(e.target).serializeArray();
+    var listId = +attrs[0].value;
+    var originalListId = this.model.get('listId');
+    var position = +attrs[1].value;
+    var cardIds = App.cards.where({ listId: listId }).map(function(card){
+      return card.id;
+    });
+    var activity;
 
-    this.model.get('activities').add(moveActivity);
+    this.model.set('listId', listId);
 
-    if (this.model.get('subscribed')) {
-      App.notifications.add(moveActivity);
-    }
+    cardIds.splice(position, 0, this.model.get('id'));
+    cardIds.forEach(function(cardId, idx) {
+      App.cards.get(cardId).save('position', idx);
+    });
 
-    App.trigger('remove_card', this.model, removedId);
-    App.trigger('add_card', this.model, newId, position);
+    App.cards.trigger('card_move');
 
+    activity = {
+      title: this.model.get('title'),
+      type: 'cardMove',
+      from: App.lists.get(originalListId).get('title'),
+      to: App.lists.get(listId).get('title'),
+      cardId: this.model.get('id'),
+    };
+
+    App.activities.create(activity);
+    App.trigger('activity', this.model, activity);
     this.remove();
     this.parentView.close();
   },
@@ -47,12 +53,11 @@ var MoveCardView = Backbone.View.extend({
 
   updateList: function(e) {
     e.preventDefault();
-    var newListTitle = $(e.target).val();
-    var list = App.lists.findWhere({ title: newListTitle });
+    var id = +$(e.target).find(':selected').attr('value');
+    var collection = App.lists.get(id);
 
     new MoveCardView({
-      list: list,
-      originalList: this.originalList,
+      collection: collection,
       target: this.target,
       model: this.model,
       parentView: this.parentView,
@@ -69,11 +74,10 @@ var MoveCardView = Backbone.View.extend({
 
   render: function() {
     var context = this.model.toJSON();
-    context.max = this.list.get('cards').length;
-    context.listTitle = this.list.get('title');
-    context.lists = App.lists.pluck('title').map(function(title) {
-     return { title: title };
-    });
+    context.positions = App.cards.where({ listId: this.collection.get('id') }).length;
+    context.listTitle = this.collection.get('title');
+    context.id = this.collection.get('id');
+    context.lists = App.lists.toJSON();
 
     $('#move-card').remove();
     this.$el.html(this.template(context));
@@ -83,8 +87,6 @@ var MoveCardView = Backbone.View.extend({
 
   initialize: function(options) {
     this.target = options.target;
-    this.list = options.list;
-    this.originalList = options.originalList;
     this.parentView = options.parentView;
     this.render();
   }

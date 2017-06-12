@@ -97,7 +97,7 @@ var ListView = Backbone.View.extend({
     this.render();
     this.listenTo(this.model, 'change', this.rerender);
     this.listenTo(this.model, 'destroy', this.remove);
-    this.listenTo(this.cards, 'change:dueDate change:subscribed label_update', this.rerender);
+    this.listenTo(this.cards, 'change:dueDate change:subscribed label_update add remove', this.rerender);
     this.listenTo(App.cards, 'card_move', this.rerender);
     this.listenTo(App.comments, 'add remove', this.rerender);
     this.listenTo(App.activites, 'add', this.rerender);
